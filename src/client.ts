@@ -102,9 +102,9 @@ export function deactivate() {
 function getConfigs() {
 	const configs = vscode.workspace.getConfiguration('typescript-web');
 	return {
-		cdn: configs.get<string>('packages.cdn'),
+		cdn: configs.get<string>('dts.cdn'),
 		// fix: Failed to execute 'postMessage' on 'Worker': #<Object> could not be cloned.
-		versions: JSON.parse(JSON.stringify(configs.get<Record<string, string>>('packages.versions'))),
+		versions: JSON.parse(JSON.stringify(configs.get<Record<string, string>>('dts.versions'))),
 		supportVue: configs.get<boolean>('supportVue') ?? false,
 		supportSvelte: configs.get<boolean>('supportSvelte') ?? false,
 		supportAngular: configs.get<boolean>('supportAngular') ?? false,

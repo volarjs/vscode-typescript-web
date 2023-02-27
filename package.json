@@ -66,11 +66,11 @@
 					"default": "off",
 					"description": "Traces the communication between VS Code and the language server."
 				},
-				"typescript-web.packages.versions": {
+				"typescript-web.dts.versions": {
 					"type": "object",
 					"description": "Specify the version of TypeScript to use for JavaScript and TypeScript files."
 				},
-				"typescript-web.packages.cdn": {
+				"typescript-web.dts.cdn": {
 					"type": "string",
 					"default": "https://unpkg.com/",
 					"description": "Specify the CDN to use for downloading types."
@@ -121,6 +121,7 @@
 		"@volar-examples/angular-language-server": "1.0.22",
 		"@volar-plugins/css": "2.0.0-alpha.13",
 		"@volar-plugins/typescript": "2.0.0-alpha.13",
+		"@vscode/test-web": "latest",
 		"assert": "^2.0.0",
 		"esbuild": "0.15.18",
 		"esbuild-plugin-polyfill-node": "^0.1.4",
@@ -130,8 +131,5 @@
 		"url": "^0.11.0",
 		"vsce": "latest",
 		"vscode-languageclient": "^8.0.2"
-	},
-	"optionalDependencies": {
-		"@vscode/test-web": "latest"
 	}
 }
