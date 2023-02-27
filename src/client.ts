@@ -12,21 +12,6 @@ import type { TypeScriptWebServerOptions } from './types';
 
 let client: lsp.BaseLanguageClient | undefined;
 
-class _LanguageClient extends lsp.LanguageClient {
-	fillInitializeParams(params: lsp.InitializeParams) {
-		if (params.capabilities.textDocument) {
-			params.capabilities.textDocument.selectionRange = undefined;
-			params.capabilities.textDocument.foldingRange = undefined;
-			params.capabilities.textDocument.linkedEditingRange = undefined;
-			params.capabilities.textDocument.documentSymbol = undefined;
-			params.capabilities.textDocument.colorProvider = undefined;
-			params.capabilities.textDocument.formatting = undefined;
-			params.capabilities.textDocument.rangeFormatting = undefined;
-			params.capabilities.textDocument.onTypeFormatting = undefined;
-		}
-	}
-}
-
 export async function activate(context: vscode.ExtensionContext) {
 
 	const configs = getConfigs();
@@ -50,8 +35,6 @@ export async function activate(context: vscode.ExtensionContext) {
 		documentSelector.push({ language: 'vue' });
 	}
 
-	console.log(documentSelector);
-
 	const clientOptions: lsp.LanguageClientOptions = {
 		documentSelector,
 		initializationOptions: {
@@ -64,7 +47,7 @@ export async function activate(context: vscode.ExtensionContext) {
 			supportVue: configs.supportVue,
 		} satisfies TypeScriptWebServerOptions,
 	};
-	client = new _LanguageClient(
+	client = new lsp.LanguageClient(
 		'typescript-web',
 		'TypeScript IntelliSense for Web',
 		clientOptions,

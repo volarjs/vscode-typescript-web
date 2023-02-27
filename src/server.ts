@@ -3,46 +3,57 @@ import { createConnection, startLanguageServer, LanguageServerPlugin } from '@vo
 import * as vue from '@volar/vue-language-service';
 import * as vueCore from '@volar/vue-language-core';
 import { TypeScriptWebServerOptions } from './types';
-import type * as ts from 'typescript/lib/tsserverlibrary';
 
 const connection = createConnection();
+const baseExts = ['js', 'cjs', 'mjs', 'ts', 'cts', 'mts', 'jsx', 'tsx', 'json'];
+const emptyPluginInstance: ReturnType<LanguageServerPlugin> = {
+	tsconfigExtraFileExtensions: [],
+	diagnosticDocumentSelector: [],
+	extensions: {
+		fileRenameOperationFilter: [],
+		fileWatcher: [],
+	},
+	resolveConfig() { },
+};
 
-const plugin: LanguageServerPlugin = (options: TypeScriptWebServerOptions): ReturnType<LanguageServerPlugin> => {
-
-	// typescript
-	const exts = ['js', 'cjs', 'mjs', 'ts', 'cts', 'mts', 'jsx', 'tsx', 'json'];
-	const documentSelector: vue.DocumentSelector = [
-		{ language: 'javascript' },
-		{ language: 'typescript' },
-		{ language: 'javascriptreact' },
-		{ language: 'typescriptreact' },
-	];
-	const extraFileExtensions: ts.FileExtensionInfo[] = [];
-
-	// vue
-	if (options.supportVue) {
-		exts.push('vue');
-		documentSelector.push({ language: 'vue' });
-		extraFileExtensions.push({ extension: 'vue', isMixedContent: true, scriptKind: 7 });
-	}
-
+const basePlugin: LanguageServerPlugin = (): ReturnType<LanguageServerPlugin> => {
 	return {
-		tsconfigExtraFileExtensions: extraFileExtensions,
-		diagnosticDocumentSelector: documentSelector,
+		tsconfigExtraFileExtensions: [],
+		diagnosticDocumentSelector: [
+			{ language: 'javascript' },
+			{ language: 'typescript' },
+			{ language: 'javascriptreact' },
+			{ language: 'typescriptreact' },
+		],
 		extensions: {
-			fileRenameOperationFilter: exts,
-			fileWatcher: exts,
+			fileRenameOperationFilter: baseExts,
+			fileWatcher: baseExts,
 		},
-		resolveConfig(config, ctx) {
-
-			// base
+		resolveConfig(config) {
 			config.plugins ??= {};
 			config.plugins.typescript ??= createTsPlugin();
+		},
+	}
+};
 
-			const ts = ctx.project.workspace.workspaces.ts;
+const vuePlugin: LanguageServerPlugin = (options: TypeScriptWebServerOptions): ReturnType<LanguageServerPlugin> => {
+	if (!options.supportVue) {
+		return emptyPluginInstance;
+	}
+	else {
+		return {
+			tsconfigExtraFileExtensions: [{ extension: 'vue', isMixedContent: true, scriptKind: 7 }],
+			diagnosticDocumentSelector: [{ language: 'vue' }],
+			extensions: {
+				fileRenameOperationFilter: ['vue'],
+				fileWatcher: ['vue'],
+			},
+			resolveConfig(config, ctx) {
 
-			// ts
-			if (options.supportVue && ts) {
+				const ts = ctx.project.workspace.workspaces.ts;
+				if (!ts || !options.supportVue) {
+					return;
+				}
 
 				let vueOptions: Partial<vue.VueCompilerOptions> = {};
 				if (typeof ctx.project.tsConfig === 'string') {
@@ -55,9 +66,13 @@ const plugin: LanguageServerPlugin = (options: TypeScriptWebServerOptions): Retu
 					ctx.host.getCompilationSettings(),
 					vueOptions,
 				);
-			}
-		},
+			},
+		};
 	}
 };
 
-startLanguageServer(connection, plugin);
+startLanguageServer(
+	connection,
+	basePlugin,
+	vuePlugin,
+);
