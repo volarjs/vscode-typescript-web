@@ -7,6 +7,7 @@ import {
 	activateServerSys,
 	activateAutoInsertion,
 	getTsdk,
+	activateShowVirtualFiles,
 } from '@volar/vscode-language-client';
 import type { TypeScriptWebServerOptions } from './types';
 
@@ -91,6 +92,7 @@ export async function activate(context: vscode.ExtensionContext) {
 	activateReloadProjects('typescript-web.reload-projects', [client]);
 	activateServerSys(context, client);
 	activateAutoInsertion([client], documentFilter);
+	activateShowVirtualFiles('typescript-web.show-virtual-files', client);
 }
 
 export function deactivate() {
