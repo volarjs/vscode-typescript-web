@@ -8,8 +8,6 @@
 		"module": "commonjs",
 		"moduleResolution": "node",
 		"sourceMap": true,
-		"composite": true,
-		"declaration": true,
 		"strict": true,
 		"alwaysStrict": false,
 		"noImplicitUseStrict": true,

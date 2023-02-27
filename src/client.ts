@@ -62,7 +62,8 @@ export async function activate(context: vscode.ExtensionContext) {
 			'javascript',
 			'javascriptreact',
 		].includes(document.languageId),
-		text => `${text} (web)`,
+		text => `${text} (volar)`,
+		true,
 	);
 	activateFindFileReferences('typescript-web-find-file-references', client);
 	activateReloadProjects('typescript-web-reload-projects', [client]);
