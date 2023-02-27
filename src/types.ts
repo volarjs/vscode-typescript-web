@@ -4,4 +4,5 @@ export interface TypeScriptWebServerOptions extends LanguageServerInitialization
     supportVue?: boolean;
     supportSvelte?: boolean;
     supportAngular?: boolean;
+    supportMdx?: boolean;
 }

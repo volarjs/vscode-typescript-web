@@ -60,6 +60,10 @@ require('esbuild').build({
 					const path = require.resolve('../node_modules/punycode', { paths: [__dirname] })
 					return { path: path }
 				})
+				build.onResolve({ filter: /^assert$/ }, args => {
+					const path = require.resolve('../node_modules/assert', { paths: [__dirname] })
+					return { path: path }
+				})
 			},
 		},
 	],

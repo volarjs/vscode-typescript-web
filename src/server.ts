@@ -1,4 +1,5 @@
 import * as createTsPlugin from '@volar-plugins/typescript';
+import * as createCssPlugin from '@volar-plugins/css';
 import { createConnection, startLanguageServer, LanguageServerPlugin } from '@volar/language-server/browser';
 import { TypeScriptWebServerOptions } from './types';
 
@@ -123,10 +124,39 @@ const angularPlugin: LanguageServerPlugin = (options: TypeScriptWebServerOptions
 	};
 };
 
+/**
+ * MDX plugin
+ */
+
+import * as mdx from '@mdx-language-tools/language-core';
+
+const mdxPlugin: LanguageServerPlugin = (options: TypeScriptWebServerOptions): ReturnType<LanguageServerPlugin> => {
+	if (!options.supportMdx) {
+		return emptyPluginInstance;
+	}
+	return {
+		tsconfigExtraFileExtensions: [{ extension: 'mdx', isMixedContent: true, scriptKind: 7 }],
+		diagnosticDocumentSelector: [{ language: 'mdx' }],
+		extensions: {
+			fileRenameOperationFilter: ['mdx'],
+			fileWatcher: ['mdx'],
+		},
+		resolveConfig(config) {
+			config.plugins ??= {}
+			config.plugins.typescript ??= createTsPlugin()
+			config.plugins.css ??= createCssPlugin()
+
+			config.languages ??= {};
+			config.languages.mdx ??= mdx.MdxLanguageModule;
+		},
+	};
+};
+
 startLanguageServer(
 	connection,
 	basePlugin,
 	vuePlugin,
 	sveltePlugin,
 	angularPlugin,
+	mdxPlugin,
 );

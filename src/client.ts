@@ -31,17 +31,13 @@ export async function activate(context: vscode.ExtensionContext) {
 		configs.supportVue ? 'vue' : undefined,
 		configs.supportSvelte ? 'svelte' : undefined,
 		configs.supportAngular ? 'html' : undefined,
+		configs.supportMdx ? 'mdx' : undefined,
 	].includes(document.languageId);
 
-	if (configs.supportVue) {
-		documentSelector.push({ language: 'vue' });
-	}
-	if (configs.supportSvelte) {
-		documentSelector.push({ language: 'svelte' });
-	}
-	if (configs.supportAngular) {
-		documentSelector.push({ language: 'html' });
-	}
+	if (configs.supportVue) documentSelector.push({ language: 'vue' });
+	if (configs.supportSvelte) documentSelector.push({ language: 'svelte' });
+	if (configs.supportAngular) documentSelector.push({ language: 'html' });
+	if (configs.supportMdx) documentSelector.push({ language: 'mdx' });
 
 	const clientOptions: lsp.LanguageClientOptions = {
 		documentSelector,
@@ -80,6 +76,9 @@ export async function activate(context: vscode.ExtensionContext) {
 			if (configs.supportAngular) {
 				langs.push('angular');
 			}
+			if (configs.supportMdx) {
+				langs.push('mdx');
+			}
 			if (langs.length) {
 				return `${text} (${langs.join(', ')})`
 			}
@@ -107,5 +106,6 @@ function getConfigs() {
 		supportVue: configs.get<boolean>('supportVue') ?? false,
 		supportSvelte: configs.get<boolean>('supportSvelte') ?? false,
 		supportAngular: configs.get<boolean>('supportAngular') ?? false,
+		supportMdx: configs.get<boolean>('supportMdx') ?? false,
 	};
 }
