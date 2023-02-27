@@ -2,4 +2,5 @@ import { LanguageServerInitializationOptions } from '@volar/language-server/brow
 
 export interface TypeScriptWebServerOptions extends LanguageServerInitializationOptions {
     supportVue?: boolean;
+    supportSvelte?: boolean;
 }

@@ -29,10 +29,14 @@ export async function activate(context: vscode.ExtensionContext) {
 		'javascript',
 		'javascriptreact',
 		configs.supportVue ? 'vue' : undefined,
+		configs.supportSvelte ? 'svelte' : undefined,
 	].includes(document.languageId);
 
 	if (configs.supportVue) {
 		documentSelector.push({ language: 'vue' });
+	}
+	if (configs.supportSvelte) {
+		documentSelector.push({ language: 'svelte' });
 	}
 
 	const clientOptions: lsp.LanguageClientOptions = {
@@ -45,6 +49,7 @@ export async function activate(context: vscode.ExtensionContext) {
 				cdn: configs.cdn,
 			},
 			supportVue: configs.supportVue,
+			supportSvelte: configs.supportSvelte,
 		} satisfies TypeScriptWebServerOptions,
 	};
 	client = new lsp.LanguageClient(
@@ -81,5 +86,6 @@ function getConfigs() {
 		// fix: Failed to execute 'postMessage' on 'Worker': #<Object> could not be cloned.
 		versions: JSON.parse(JSON.stringify(configs.get<Record<string, string>>('packages.versions'))),
 		supportVue: configs.get<boolean>('supportVue') ?? false,
+		supportSvelte: configs.get<boolean>('supportSvelte') ?? false,
 	};
 }
