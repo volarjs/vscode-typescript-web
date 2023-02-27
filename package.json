@@ -1,7 +1,7 @@
 {
 	"private": true,
 	"name": "vscode-typescript-web",
-	"version": "0.0.1",
+	"version": "0.0.0",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/volarjs/vscode-typescript-web.git"
@@ -109,7 +109,7 @@
 		"watch:base": "tsc -b -w",
 		"watch:vscode": "npm run build -- --watch",
 		"pack": "npm run build && vsce package",
-		"release": "npm run build && vsce publish",
+		"release": "npm run build && vsce publish --target web",
 		"chrome": "vscode-test-web --browserType=chromium --extensionDevelopmentPath=. ."
 	},
 	"devDependencies": {
