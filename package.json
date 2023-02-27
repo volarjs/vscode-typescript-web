@@ -9,6 +9,7 @@
 	"categories": [
 		"Programming Languages"
 	],
+	"icon": "images/icon.png",
 	"displayName": "TypeScript IntelliSense for Web",
 	"description": "Support TypeScript IntelliSense for Web IDE",
 	"author": "johnsoncodehk",
