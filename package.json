@@ -9,6 +9,9 @@
 	"categories": [
 		"Programming Languages"
 	],
+	"sponsor": {
+		"url": "https://github.com/sponsors/johnsoncodehk"
+	},
 	"icon": "images/icon.png",
 	"displayName": "TypeScript IntelliSense for Web",
 	"description": "Support TypeScript IntelliSense for Web IDE",
