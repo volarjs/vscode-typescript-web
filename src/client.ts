@@ -28,6 +28,7 @@ class _LanguageClient extends lsp.LanguageClient {
 
 export async function activate(context: vscode.ExtensionContext) {
 
+	const configs = getConfigs();
 	const serverMain = vscode.Uri.joinPath(context.extensionUri, 'dist/server.js');
 	const worker = new Worker(serverMain.toString());
 	const clientOptions: lsp.LanguageClientOptions = {
@@ -41,6 +42,8 @@ export async function activate(context: vscode.ExtensionContext) {
 			respectClientCapabilities: true,
 			typescript: {
 				tsdk: getTsdk(context).tsdk,
+				versions: configs.versions,
+				cdn: configs.cdn,
 			},
 		} satisfies LanguageServerInitializationOptions,
 	};
@@ -64,12 +67,22 @@ export async function activate(context: vscode.ExtensionContext) {
 		].includes(document.languageId),
 		text => `${text} (volar)`,
 		true,
+		configs.cdn,
 	);
-	activateFindFileReferences('typescript-web-find-file-references', client);
-	activateReloadProjects('typescript-web-reload-projects', [client]);
+	activateFindFileReferences('typescript-web.find-file-references', client);
+	activateReloadProjects('typescript-web.reload-projects', [client]);
 	activateServerSys(context, client);
 }
 
 export function deactivate() {
 	return client?.stop();
+}
+
+function getConfigs() {
+	const configs = vscode.workspace.getConfiguration('typescript-web');
+	return {
+		cdn: configs.get<string>('packages.cdn'),
+		// fix: Failed to execute 'postMessage' on 'Worker': #<Object> could not be cloned.
+		versions: JSON.parse(JSON.stringify(configs.get<Record<string, string>>('packages.versions'))),
+	};
 }

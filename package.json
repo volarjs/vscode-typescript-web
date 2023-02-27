@@ -38,6 +38,15 @@
 					],
 					"default": "off",
 					"description": "Traces the communication between VS Code and the language server."
+				},
+				"typescript-web.packages.versions": {
+					"type": "object",
+					"description": "Specify the version of TypeScript to use for JavaScript and TypeScript files."
+				},
+				"typescript-web.packages.cdn": {
+					"type": "string",
+					"default": "https://unpkg.com/",
+					"description": "Specify the CDN to use for downloading types."
 				}
 			}
 		}
