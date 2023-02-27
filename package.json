@@ -1,20 +1,70 @@
 {
 	"private": true,
+	"name": "vscode-typescript-web",
+	"version": "0.0.1",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/volarjs/language-tools-starter.git"
+		"url": "https://github.com/volarjs/vscode-typescript-web.git"
+	},
+	"categories": [
+		"Programming Languages"
+	],
+	"displayName": "TypeScript IntelliSense for Web",
+	"description": "Support TypeScript IntelliSense for Web IDE",
+	"author": "johnsoncodehk",
+	"publisher": "johnsoncodehk",
+	"engines": {
+		"vscode": "^1.67.0"
+	},
+	"activationEvents": [
+		"onLanguage:javascript",
+		"onLanguage:typescript",
+		"onLanguage:javascriptreact",
+		"onLanguage:typescriptreact"
+	],
+	"browser": "dist/client.js",
+	"contributes": {
+		"configuration": {
+			"type": "object",
+			"title": "TypeScript Web",
+			"properties": {
+				"typescript-web.trace.server": {
+					"scope": "window",
+					"type": "string",
+					"enum": [
+						"off",
+						"messages",
+						"verbose"
+					],
+					"default": "off",
+					"description": "Traces the communication between VS Code and the language server."
+				}
+			}
+		}
 	},
 	"scripts": {
-		"build": "tsc -b tsconfig.build.json",
-		"watch": "npm run build && (npm run watch:tsc & npm run watch:esbuild)",
-		"watch:tsc": "tsc -b tsconfig.build.json -w",
-		"watch:esbuild": "cd ./packages/vscode-html1 && npm run watch",
-		"prerelease": "npm run build",
-		"pack": "cd ./packages/vscode-html1 && npm run pack",
-		"release": "cd ./packages/vscode-html1 && npm run release"
+		"prebuild": "tsc -b",
+		"build": "node scripts/build",
+		"watch": "npm run build && (npm run watch:base & npm run watch:vscode)",
+		"watch:base": "tsc -b -w",
+		"watch:vscode": "npm run build -- --watch",
+		"pack": "npm run build && vsce package",
+		"release": "npm run build && vsce publish",
+		"chrome": "vscode-test-web --browserType=chromium --extensionDevelopmentPath=. ."
 	},
 	"devDependencies": {
 		"@types/node": "latest",
-		"typescript": "latest"
+		"@types/vscode": "1.67.0",
+		"@volar/language-server": "1.3.0-alpha.0",
+		"@volar/vscode-language-client": "1.3.0-alpha.0",
+		"@volar-plugins/typescript": "2.0.0-alpha.13",
+		"esbuild": "0.15.18",
+		"path-browserify": "^1.0.1",
+		"typescript": "latest",
+		"vsce": "latest",
+		"vscode-languageclient": "^8.0.2"
+	},
+	"optionalDependencies": {
+		"@vscode/test-web": "latest"
 	}
 }

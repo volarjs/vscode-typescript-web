@@ -3,32 +3,22 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Launch Client",
-			"type": "extensionHost",
+			"name": "Launch Web Client",
+			"type": "pwa-extensionHost",
+			"debugWebWorkerHost": true,
 			"request": "launch",
-			"runtimeExecutable": "${execPath}",
 			"args": [
 				"--disable-extensions",
-				"--extensionDevelopmentPath=${workspaceRoot}/packages/vscode-html1",
-				"--folder-uri=${workspaceRoot}/sample",
+				"--extensionDevelopmentPath=${workspaceFolder}",
+				"--extensionDevelopmentKind=web"
 			],
 			"outFiles": [
-				"${workspaceRoot}/*/*/out/**/*.js"
+				"${workspaceRoot}/out/**/*.js"
 			],
 			"preLaunchTask": {
 				"type": "npm",
 				"script": "watch"
 			}
-		},
-		{
-			"name": "Attach to Server",
-			"type": "node",
-			"request": "attach",
-			"port": 6009,
-			"restart": true,
-			"outFiles": [
-				"${workspaceRoot}/*/*/out/**/*.js"
-			]
-		},
+		}
 	],
 }

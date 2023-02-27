@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"target": "ES2016",
+		"target": "ES2021",
 		"lib": [
 			"WebWorker",
 			"ES2021",
@@ -18,10 +18,10 @@
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"baseUrl": "./",
-		"paths": {
-			"@html1-language-tools/*": [
-				"packages/*/src"
-			],
-		},
+		"outDir": "out",
+		"rootDir": "src",
 	},
+	"include": [
+		"src",
+	],
 }
