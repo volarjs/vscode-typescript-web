@@ -30,6 +30,7 @@ export async function activate(context: vscode.ExtensionContext) {
 		'javascriptreact',
 		configs.supportVue ? 'vue' : undefined,
 		configs.supportSvelte ? 'svelte' : undefined,
+		configs.supportAngular ? 'html' : undefined,
 	].includes(document.languageId);
 
 	if (configs.supportVue) {
@@ -37,6 +38,9 @@ export async function activate(context: vscode.ExtensionContext) {
 	}
 	if (configs.supportSvelte) {
 		documentSelector.push({ language: 'svelte' });
+	}
+	if (configs.supportAngular) {
+		documentSelector.push({ language: 'html' });
 	}
 
 	const clientOptions: lsp.LanguageClientOptions = {
@@ -61,11 +65,26 @@ export async function activate(context: vscode.ExtensionContext) {
 	await client.start();
 
 	activateTsVersionStatusItem(
-		'typescript-web-ts-version',
+		'typescript-web.ts-version',
 		context,
 		client,
 		documentFilter,
-		text => `${text} (volar)`,
+		text => {
+			const langs: string[] = [];
+			if (configs.supportVue) {
+				langs.push('vue');
+			}
+			if (configs.supportSvelte) {
+				langs.push('svelte');
+			}
+			if (configs.supportAngular) {
+				langs.push('angular');
+			}
+			if (langs.length) {
+				return `${text} (${langs.join(', ')})`
+			}
+			return text;
+		},
 		true,
 		configs.cdn,
 	);
@@ -87,5 +106,6 @@ function getConfigs() {
 		versions: JSON.parse(JSON.stringify(configs.get<Record<string, string>>('packages.versions'))),
 		supportVue: configs.get<boolean>('supportVue') ?? false,
 		supportSvelte: configs.get<boolean>('supportSvelte') ?? false,
+		supportAngular: configs.get<boolean>('supportAngular') ?? false,
 	};
 }

@@ -69,8 +69,13 @@
 				},
 				"typescript-web.supportSvelte": {
 					"type": "boolean",
-					"default": false,
+					"default": true,
 					"description": "Support Svelte SFC."
+				},
+				"typescript-web.supportAngular": {
+					"type": "boolean",
+					"default": true,
+					"description": "Support TS in .html files for Angular."
 				}
 			}
 		}
@@ -94,6 +99,7 @@
 		"@volar/vue-language-core": "1.2.0",
 		"@volar/vue-language-service": "1.2.0",
 		"@volar-examples/svelte-language-core": "1.0.22",
+		"@volar-examples/angular-language-server": "1.0.22",
 		"@volar-plugins/typescript": "2.0.0-alpha.13",
 		"esbuild": "0.15.18",
 		"esbuild-plugin-polyfill-node": "^0.1.4",

@@ -102,9 +102,31 @@ const sveltePlugin: LanguageServerPlugin = (options: TypeScriptWebServerOptions)
 	};
 };
 
+/**
+ * Angular plugin
+ */
+
+import * as angular from '@volar-examples/angular-language-server';
+
+const angularPlugin: LanguageServerPlugin = (options: TypeScriptWebServerOptions): ReturnType<LanguageServerPlugin> => {
+	if (!options.supportAngular) {
+		return emptyPluginInstance;
+	}
+	return {
+		tsconfigExtraFileExtensions: [{ extension: 'html', isMixedContent: true, scriptKind: 7 }],
+		diagnosticDocumentSelector: [{ language: 'html' }],
+		extensions: {
+			fileRenameOperationFilter: ['html'],
+			fileWatcher: ['html'],
+		},
+		resolveConfig: angular.resolveConfig,
+	};
+};
+
 startLanguageServer(
 	connection,
 	basePlugin,
 	vuePlugin,
 	sveltePlugin,
+	angularPlugin,
 );
