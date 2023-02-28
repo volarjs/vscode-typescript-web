@@ -42,7 +42,7 @@ Note that only Vue is a mature implementation, the others are not. The extension
 
 ## Syntax Highlighting and Grammar
 
-This extension only includes IntelliSense and syntax highlighting support for .vue, .svelte, and .mdx files; you will still need to install the corresponding extensions for this:
+This extension only includes IntelliSense support; you will still need to install the corresponding extensions for syntax highlighting and grammar:
 
 - Vue: https://marketplace.visualstudio.com/items?itemName=Vue.volar
 - Svelte: https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode
