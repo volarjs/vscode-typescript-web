@@ -1,7 +1,7 @@
 {
 	"private": true,
 	"name": "vscode-typescript-web",
-	"version": "0.0.1",
+	"version": "0.0.9",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/volarjs/vscode-typescript-web.git"
@@ -110,6 +110,7 @@
 		"watch:vscode": "npm run build -- --watch",
 		"pack": "npm run build && vsce package",
 		"release": "npm run build && vsce publish --target web",
+		"pre-release": "npm run build && vsce publish --target web --pre-release",
 		"chrome": "vscode-test-web --browserType=chromium --extensionDevelopmentPath=. ."
 	},
 	"devDependencies": {
@@ -119,7 +120,7 @@
 		"@volar/language-server": "1.3.0-alpha.0",
 		"@volar/language-service": "1.3.0-alpha.0",
 		"@volar/vscode-language-client": "1.3.0-alpha.0",
-		"@volar/vue-language-core": "1.2.0",
+		"@volar/vue-language-core": "1.2.0-patch.2",
 		"@volar/vue-language-service": "1.2.0",
 		"@volar-examples/svelte-language-core": "1.0.22",
 		"@volar-examples/angular-language-server": "1.0.22",
@@ -128,6 +129,7 @@
 		"@vscode/test-web": "latest",
 		"assert": "^2.0.0",
 		"esbuild": "0.15.18",
+		"esbuild-plugin-copy": "latest",
 		"esbuild-plugin-polyfill-node": "^0.1.4",
 		"path-browserify": "^1.0.1",
 		"punycode": "^2.3.0",
