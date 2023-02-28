@@ -48,6 +48,10 @@ This extension only includes IntelliSense and syntax highlighting support for .v
 - Svelte: https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode
 - MDX: https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx
 
+## Disable Built-in TypeScript Extension
+
+This extension and the Built-in TypeScript Extension sometimes show duplicate results, which is not a big problem, but you still can disable the Built-in TypeScript Extension yourself if you want, please refer to https://vuejs.org/guide/typescript/overview.html#volar-takeover-mode.
+
 ## Check internally generated virtual code for .vue, svelte, .html, .mdx.
 
 As with the official Vue extension, you can use this extension to view virtual code in a Web IDE, simply by running the TypeScript Web (Debug): Show Virtual Files command.
