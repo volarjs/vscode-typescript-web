@@ -1,12 +1,20 @@
 # TypeScript IntelliSense for Web
 
-> TypeScript language server implement for Web IDE based on [Volar.js](https://volarjs.github.io/)
+> TypeScript Support for Vue + Svelte + Angular + MDX on Web IDE based on [Volar.js](https://volarjs.github.io/)
 
 ## Why?
 
 - VSCode's built-in TypeScript extension does not support across files type-check and IntelliSense on Web IDE (github.dev), this extension implements that.
 
-- Since the node_modules cannot be installed by opening the project through github.dev, type hints is almost completely lost. This extension will download the missing node_modules .d.ts file from the CDN, and the experience is theoretically consistent with the local IDE.
+- Since the node_modules cannot be installed by opening the project through github.dev, type hints is almost completely lost. This extension will download the missing node_modules `.d.ts` file from CDN, and the experience is theoretically consistent with the local IDE.
+
+### ⚠️ Note
+
+- This extension will download all `.d.ts` files that are directly and indirectly referenced from your project. If network usage is a problem to you, please don't install this extension.
+
+- Auto fetching `.d.ts` is only supported for `vscode.dev`, but does not support for `github.dev` since Content Security Policy.
+
+Try it: https://vscode.dev/github/johnsoncodehk/volar-starter
 
 ## Vue Support
 

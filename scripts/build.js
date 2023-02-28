@@ -24,6 +24,14 @@ require('esbuild').build({
 				})
 			},
 		},
+		require('esbuild-plugin-copy').copy({
+			resolveFrom: 'cwd',
+			assets: {
+				from: ['./node_modules/typescript/lib/lib*.d.ts'],
+				to: ['./dist/typescript'],
+			},
+			keepStructure: true,
+		})
 	],
 }).catch(() => process.exit(1))
 

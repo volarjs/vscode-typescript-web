@@ -6,7 +6,7 @@ import {
 	activateReloadProjects,
 	activateServerSys,
 	activateAutoInsertion,
-	getTsdk,
+	activateTsConfigStatusItem,
 	activateShowVirtualFiles,
 } from '@volar/vscode-language-client';
 import type { TypeScriptWebServerOptions } from './types';
@@ -40,12 +40,14 @@ export async function activate(context: vscode.ExtensionContext) {
 	if (configs.supportAngular) documentSelector.push({ language: 'html' });
 	if (configs.supportMdx) documentSelector.push({ language: 'mdx' });
 
+	const tsdkUri = context.extensionUri.toString() + '/dist/typescript';
 	const clientOptions: lsp.LanguageClientOptions = {
 		documentSelector,
 		initializationOptions: {
 			respectClientCapabilities: true,
 			typescript: {
-				tsdk: getTsdk(context).tsdk,
+				tsdk: '',
+				tsdkUri,
 				versions: configs.versions,
 				cdn: configs.cdn,
 			},
@@ -87,12 +89,14 @@ export async function activate(context: vscode.ExtensionContext) {
 		},
 		true,
 		configs.cdn,
+		tsdkUri,
 	);
 	activateFindFileReferences('typescript-web.find-file-references', client);
 	activateReloadProjects('typescript-web.reload-projects', [client]);
-	activateServerSys(context, client);
+	activateServerSys(context, client, configs.cdn);
 	activateAutoInsertion([client], documentFilter);
 	activateShowVirtualFiles('typescript-web.show-virtual-files', client);
+	activateTsConfigStatusItem('typescript-web.tsconfig', client, documentFilter);
 }
 
 export function deactivate() {
