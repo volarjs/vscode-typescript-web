@@ -8,6 +8,7 @@ import {
 	activateAutoInsertion,
 	activateTsConfigStatusItem,
 	activateShowVirtualFiles,
+	getTsdk,
 } from '@volar/vscode-language-client';
 import type { TypeScriptWebServerOptions } from './types';
 
@@ -40,14 +41,12 @@ export async function activate(context: vscode.ExtensionContext) {
 	if (configs.supportAngular) documentSelector.push({ language: 'html' });
 	if (configs.supportMdx) documentSelector.push({ language: 'mdx' });
 
-	const tsdkUri = context.extensionUri.toString() + '/dist/typescript';
 	const clientOptions: lsp.LanguageClientOptions = {
 		documentSelector,
 		initializationOptions: {
 			respectClientCapabilities: true,
 			typescript: {
-				tsdk: '',
-				tsdkUri,
+				tsdk: getTsdk(context).tsdk,
 				versions: configs.versions,
 				cdn: configs.cdn,
 			},
@@ -70,26 +69,16 @@ export async function activate(context: vscode.ExtensionContext) {
 		documentFilter,
 		text => {
 			const langs: string[] = [];
-			if (configs.supportVue) {
-				langs.push('vue');
-			}
-			if (configs.supportSvelte) {
-				langs.push('svelte');
-			}
-			if (configs.supportAngular) {
-				langs.push('angular');
-			}
-			if (configs.supportMdx) {
-				langs.push('mdx');
-			}
-			if (langs.length) {
-				return `${text} (${langs.join(', ')})`
-			}
-			return text;
+
+			if (configs.supportVue) langs.push('vue');
+			if (configs.supportSvelte) langs.push('svelte');
+			if (configs.supportAngular) langs.push('angular');
+			if (configs.supportMdx) langs.push('mdx');
+
+			return langs.length ? `${text} (${langs.join(', ')})` : text;
 		},
 		true,
 		configs.cdn,
-		tsdkUri,
 	);
 	activateFindFileReferences('typescript-web.find-file-references', client);
 	activateReloadProjects('typescript-web.reload-projects', [client]);
