@@ -9,7 +9,7 @@ import {
 	activateTsConfigStatusItem,
 	activateShowVirtualFiles,
 	getTsdk,
-} from '@volar/vscode-language-client';
+} from '@volar/vscode';
 import type { TypeScriptWebServerOptions } from './types';
 
 let client: lsp.BaseLanguageClient | undefined;
@@ -44,7 +44,6 @@ export async function activate(context: vscode.ExtensionContext) {
 	const clientOptions: lsp.LanguageClientOptions = {
 		documentSelector,
 		initializationOptions: {
-			respectClientCapabilities: true,
 			typescript: {
 				tsdk: getTsdk(context).tsdk,
 				versions: configs.versions,

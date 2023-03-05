@@ -1,40 +1,26 @@
-import * as createTsPlugin from '@volar-plugins/typescript';
-import * as createCssPlugin from '@volar-plugins/css';
+import createTsPlugin from '@volar-plugins/typescript';
+import createCssPlugin from '@volar-plugins/css';
 import { createConnection, startLanguageServer, LanguageServerPlugin } from '@volar/language-server/browser';
 import { TypeScriptWebServerOptions } from './types';
 
 const connection = createConnection();
 const emptyPluginInstance: ReturnType<LanguageServerPlugin> = {
-	tsconfigExtraFileExtensions: [],
-	diagnosticDocumentSelector: [],
-	extensions: {
-		fileRenameOperationFilter: [],
-		fileWatcher: [],
-	},
-	resolveConfig() { },
+	extraFileExtensions: [],
+	watchFileExtensions: [],
 };
 
 /**
  * Base TypeScript plugin
  */
 
-const baseExts = ['js', 'cjs', 'mjs', 'ts', 'cts', 'mts', 'jsx', 'tsx', 'json'];
 const basePlugin: LanguageServerPlugin = (): ReturnType<LanguageServerPlugin> => {
 	return {
-		tsconfigExtraFileExtensions: [],
-		diagnosticDocumentSelector: [
-			{ language: 'javascript' },
-			{ language: 'typescript' },
-			{ language: 'javascriptreact' },
-			{ language: 'typescriptreact' },
-		],
-		extensions: {
-			fileRenameOperationFilter: baseExts,
-			fileWatcher: baseExts,
-		},
+		extraFileExtensions: [],
+		watchFileExtensions: ['js', 'cjs', 'mjs', 'ts', 'cts', 'mts', 'jsx', 'tsx', 'json'],
 		resolveConfig(config) {
 			config.plugins ??= {};
 			config.plugins.typescript ??= createTsPlugin();
+			return config;
 		},
 	}
 };
@@ -51,28 +37,24 @@ const vuePlugin: LanguageServerPlugin = (options: TypeScriptWebServerOptions): R
 		return emptyPluginInstance;
 	}
 	return {
-		tsconfigExtraFileExtensions: [{ extension: 'vue', isMixedContent: true, scriptKind: 7 }],
-		diagnosticDocumentSelector: [{ language: 'vue' }],
-		extensions: {
-			fileRenameOperationFilter: ['vue'],
-			fileWatcher: ['vue'],
-		},
-		resolveConfig(config, ctx) {
+		extraFileExtensions: [{ extension: 'vue', isMixedContent: true, scriptKind: 7 }],
+		watchFileExtensions: ['vue'],
+		resolveConfig(config, modules, ctx) {
 
-			const ts = ctx.project.workspace.workspaces.ts;
+			const ts = modules.typescript;
 			if (!ts || !options.supportVue) {
-				return;
+				return config;
 			}
 
 			let vueOptions: Partial<vue.VueCompilerOptions> = {};
-			if (typeof ctx.project.tsConfig === 'string') {
+			if (typeof ctx?.project.tsConfig === 'string') {
 				vueOptions = vueCore.createParsedCommandLine(ts, ctx.sys, ctx.project.tsConfig, []).vueOptions;
 			}
 
-			vue.resolveConfig(
+			return vue.resolveConfig(
 				config,
 				ts,
-				ctx.host.getCompilationSettings(),
+				ctx?.host.getCompilationSettings() ?? {},
 				vueOptions,
 			);
 		},
@@ -90,15 +72,12 @@ const sveltePlugin: LanguageServerPlugin = (options: TypeScriptWebServerOptions)
 		return emptyPluginInstance;
 	}
 	return {
-		tsconfigExtraFileExtensions: [{ extension: 'svelte', isMixedContent: true, scriptKind: 7 }],
-		diagnosticDocumentSelector: [{ language: 'svelte' }],
-		extensions: {
-			fileRenameOperationFilter: ['svelte'],
-			fileWatcher: ['svelte'],
-		},
+		extraFileExtensions: [{ extension: 'svelte', isMixedContent: true, scriptKind: 7 }],
+		watchFileExtensions: ['svelte'],
 		resolveConfig(config) {
 			config.languages ??= {};
 			config.languages.svelte ??= svelte.languageModule;
+			return config;
 		},
 	};
 };
@@ -114,12 +93,8 @@ const angularPlugin: LanguageServerPlugin = (options: TypeScriptWebServerOptions
 		return emptyPluginInstance;
 	}
 	return {
-		tsconfigExtraFileExtensions: [{ extension: 'html', isMixedContent: true, scriptKind: 7 }],
-		diagnosticDocumentSelector: [{ language: 'html' }],
-		extensions: {
-			fileRenameOperationFilter: ['html'],
-			fileWatcher: ['html'],
-		},
+		extraFileExtensions: [{ extension: 'html', isMixedContent: true, scriptKind: 7 }],
+		watchFileExtensions: ['html'],
 		resolveConfig: angular.resolveConfig,
 	};
 };
@@ -135,12 +110,8 @@ const mdxPlugin: LanguageServerPlugin = (options: TypeScriptWebServerOptions): R
 		return emptyPluginInstance;
 	}
 	return {
-		tsconfigExtraFileExtensions: [{ extension: 'mdx', isMixedContent: true, scriptKind: 7 }],
-		diagnosticDocumentSelector: [{ language: 'mdx' }],
-		extensions: {
-			fileRenameOperationFilter: ['mdx'],
-			fileWatcher: ['mdx'],
-		},
+		extraFileExtensions: [{ extension: 'mdx', isMixedContent: true, scriptKind: 7 }],
+		watchFileExtensions: ['mdx'],
 		resolveConfig(config) {
 			config.plugins ??= {}
 			config.plugins.typescript ??= createTsPlugin()
@@ -148,6 +119,8 @@ const mdxPlugin: LanguageServerPlugin = (options: TypeScriptWebServerOptions): R
 
 			config.languages ??= {};
 			config.languages.mdx ??= mdx.MdxLanguageModule;
+
+			return config;
 		},
 	};
 };
