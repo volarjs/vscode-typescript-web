@@ -12,7 +12,7 @@
 
 - This extension will download all `.d.ts` files that are directly and indirectly referenced from your project. If network usage is a problem to you, please don't install this extension.
 
-- Auto fetching `.d.ts` is only supported for `vscode.dev`, but does not support for `github.dev` since Content Security Policy.
+- Auto acquire `.d.ts` is only supported for `vscode.dev`, but does not support for `github.dev` since Content Security Policy.
 
 Try it: https://vscode.dev/github/johnsoncodehk/volar-starter
 

@@ -1,4 +1,4 @@
-import createTsService from 'volar-service-typescript';
+import createTsService, { createJsDelivrDtsHost } from 'volar-service-typescript';
 import { createConnection, startLanguageServer, LanguageServerPlugin } from '@volar/language-server/browser';
 import { TypeScriptWebServerOptions } from './types';
 
@@ -12,13 +12,15 @@ const emptyPluginInstance: ReturnType<LanguageServerPlugin> = {
  * Base TypeScript plugin
  */
 
-const basePlugin: LanguageServerPlugin = (): ReturnType<LanguageServerPlugin> => {
+const basePlugin: LanguageServerPlugin = (options: TypeScriptWebServerOptions): ReturnType<LanguageServerPlugin> => {
 	return {
 		extraFileExtensions: [],
 		watchFileExtensions: ['js', 'cjs', 'mjs', 'ts', 'cts', 'mts', 'jsx', 'tsx', 'json'],
 		resolveConfig(config) {
 			config.services ??= {};
-			config.services.typescript ??= createTsService();
+			config.services.typescript = createTsService({
+				dtsHost: createJsDelivrDtsHost(options.versions),
+			});
 			return config;
 		},
 	}
