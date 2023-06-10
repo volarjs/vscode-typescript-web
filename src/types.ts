@@ -1,8 +1,7 @@
-import { LanguageServerInitializationOptions } from '@volar/language-server/browser';
+import { InitializationOptions } from '@volar/language-server/browser';
 
-export interface TypeScriptWebServerOptions extends LanguageServerInitializationOptions {
+export interface TypeScriptWebServerOptions extends InitializationOptions {
+    versions?: Record<string, string>;
     supportVue?: boolean;
-    supportSvelte?: boolean;
-    supportAngular?: boolean;
-    supportMdx?: boolean;
+    supportAstro?: boolean;
 }

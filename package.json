@@ -21,6 +21,8 @@
 		"vscode": "^1.67.0"
 	},
 	"activationEvents": [
+		"onLanguage:vue",
+		"onLanguage:astro",
 		"onLanguage:javascript",
 		"onLanguage:typescript",
 		"onLanguage:javascriptreact",
@@ -36,15 +38,9 @@
 				]
 			},
 			{
-				"id": "svelte",
+				"id": "astro",
 				"extensions": [
-					".svelte"
-				]
-			},
-			{
-				"id": "mdx",
-				"extensions": [
-					".mdx"
+					".astro"
 				]
 			}
 		],
@@ -74,30 +70,15 @@
 					"type": "object",
 					"description": "Specify the version of TypeScript to use for JavaScript and TypeScript files."
 				},
-				"typescript-web.dts.cdn": {
-					"type": "string",
-					"default": "https://unpkg.com/",
-					"description": "Specify the CDN to use for downloading types."
-				},
 				"typescript-web.supportVue": {
 					"type": "boolean",
 					"default": true,
 					"description": "Support Vue SFC."
 				},
-				"typescript-web.supportSvelte": {
+				"typescript-web.supportAstro": {
 					"type": "boolean",
 					"default": true,
-					"description": "Support Svelte SFC."
-				},
-				"typescript-web.supportAngular": {
-					"type": "boolean",
-					"default": true,
-					"description": "Support TS in .html files for Angular."
-				},
-				"typescript-web.supportMdx": {
-					"type": "boolean",
-					"default": true,
-					"description": "Support TS and CSS in .mdx files."
+					"description": "Support Astro SFC."
 				}
 			}
 		}
@@ -111,31 +92,27 @@
 		"pack": "npm run build && vsce package",
 		"release": "npm run build && vsce publish --target web",
 		"pre-release": "npm run build && vsce publish --target web --pre-release",
-		"chrome": "vscode-test-web --browserType=chromium --extensionDevelopmentPath=. ."
+		"chrome": "vscode-test-web --browserType=chromium --extensionDevelopmentPath=. ../volar-starter"
 	},
 	"devDependencies": {
+		"@astrojs/language-server": "2.0.17",
 		"@types/node": "latest",
 		"@types/vscode": "1.67.0",
-		"@mdx-language-tools/language-core": "0.0.1",
-		"@volar/language-server": "1.4.0-alpha.3",
-		"@volar/language-service": "1.4.0-alpha.3",
-		"@volar/vscode": "1.4.0-alpha.3",
-		"@volar/vue-language-core": "1.2.0-patch.2",
-		"@volar/vue-language-service": "1.2.0",
-		"@volar-examples/svelte-language-core": "1.0.22",
-		"@volar-examples/angular-language-server": "1.0.22",
-		"@volar-plugins/css": "2.0.0-alpha.18",
-		"@volar-plugins/typescript": "2.0.0-alpha.18",
+		"@volar/language-server": "1.7.4",
+		"@volar/language-service": "1.7.4",
+		"@volar/vscode": "1.7.4",
+		"@vue/language-server": "1.7.11",
+		"volar-service-typescript": "0.0.7",
 		"@vscode/test-web": "latest",
-		"assert": "^2.0.0",
 		"esbuild": "0.15.18",
 		"esbuild-plugin-copy": "latest",
 		"esbuild-plugin-polyfill-node": "^0.1.4",
 		"path-browserify": "^1.0.1",
 		"punycode": "^2.3.0",
 		"typescript": "latest",
+		"util": "^0.12.5",
 		"url": "^0.11.0",
 		"vsce": "latest",
-		"vscode-languageclient": "^8.0.2"
+		"vscode-languageclient": "^8.1.0"
 	}
 }

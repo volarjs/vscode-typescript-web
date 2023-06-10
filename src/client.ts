@@ -7,7 +7,6 @@ import {
 	activateServerSys,
 	activateAutoInsertion,
 	activateTsConfigStatusItem,
-	activateShowVirtualFiles,
 	getTsdk,
 } from '@volar/vscode';
 import type { TypeScriptWebServerOptions } from './types';
@@ -31,26 +30,21 @@ export async function activate(context: vscode.ExtensionContext) {
 		'javascript',
 		'javascriptreact',
 		configs.supportVue ? 'vue' : undefined,
-		configs.supportSvelte ? 'svelte' : undefined,
-		configs.supportAngular ? 'html' : undefined,
-		configs.supportMdx ? 'mdx' : undefined,
+		configs.supportAstro ? 'astro' : undefined,
 	].includes(document.languageId);
 
 	if (configs.supportVue) documentSelector.push({ language: 'vue' });
-	if (configs.supportSvelte) documentSelector.push({ language: 'svelte' });
-	if (configs.supportAngular) documentSelector.push({ language: 'html' });
-	if (configs.supportMdx) documentSelector.push({ language: 'mdx' });
+	if (configs.supportAstro) documentSelector.push({ language: 'astro' });
 
 	const clientOptions: lsp.LanguageClientOptions = {
 		documentSelector,
 		initializationOptions: {
 			typescript: {
-				tsdk: getTsdk(context).tsdk,
-				versions: configs.versions,
-				cdn: configs.cdn,
+				tsdk: (await getTsdk(context)).tsdk,
 			},
+			versions: configs.versions,
 			supportVue: configs.supportVue,
-			supportSvelte: configs.supportSvelte,
+			supportAstro: configs.supportAstro,
 		} satisfies TypeScriptWebServerOptions,
 	};
 	client = new lsp.LanguageClient(
@@ -70,20 +64,16 @@ export async function activate(context: vscode.ExtensionContext) {
 			const langs: string[] = [];
 
 			if (configs.supportVue) langs.push('vue');
-			if (configs.supportSvelte) langs.push('svelte');
-			if (configs.supportAngular) langs.push('angular');
-			if (configs.supportMdx) langs.push('mdx');
+			if (configs.supportAstro) langs.push('astro');
 
 			return langs.length ? `${text} (${langs.join(', ')})` : text;
 		},
 		true,
-		configs.cdn,
 	);
 	activateFindFileReferences('typescript-web.find-file-references', client);
 	activateReloadProjects('typescript-web.reload-projects', [client]);
-	activateServerSys(context, client, configs.cdn);
+	activateServerSys(client);
 	activateAutoInsertion([client], documentFilter);
-	activateShowVirtualFiles('typescript-web.show-virtual-files', client);
 	activateTsConfigStatusItem('typescript-web.tsconfig', client, documentFilter);
 }
 
@@ -94,12 +84,9 @@ export function deactivate() {
 function getConfigs() {
 	const configs = vscode.workspace.getConfiguration('typescript-web');
 	return {
-		cdn: configs.get<string>('dts.cdn'),
 		// fix: Failed to execute 'postMessage' on 'Worker': #<Object> could not be cloned.
 		versions: JSON.parse(JSON.stringify(configs.get<Record<string, string>>('dts.versions'))),
 		supportVue: configs.get<boolean>('supportVue') ?? false,
-		supportSvelte: configs.get<boolean>('supportSvelte') ?? false,
-		supportAngular: configs.get<boolean>('supportAngular') ?? false,
-		supportMdx: configs.get<boolean>('supportMdx') ?? false,
+		supportAstro: configs.get<boolean>('supportAstro') ?? false,
 	};
 }

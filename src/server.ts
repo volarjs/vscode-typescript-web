@@ -1,5 +1,4 @@
-import createTsPlugin from '@volar-plugins/typescript';
-import createCssPlugin from '@volar-plugins/css';
+import createTsService from 'volar-service-typescript';
 import { createConnection, startLanguageServer, LanguageServerPlugin } from '@volar/language-server/browser';
 import { TypeScriptWebServerOptions } from './types';
 
@@ -18,8 +17,8 @@ const basePlugin: LanguageServerPlugin = (): ReturnType<LanguageServerPlugin> =>
 		extraFileExtensions: [],
 		watchFileExtensions: ['js', 'cjs', 'mjs', 'ts', 'cts', 'mts', 'jsx', 'tsx', 'json'],
 		resolveConfig(config) {
-			config.plugins ??= {};
-			config.plugins.typescript ??= createTsPlugin();
+			config.services ??= {};
+			config.services.typescript ??= createTsService();
 			return config;
 		},
 	}
@@ -29,107 +28,31 @@ const basePlugin: LanguageServerPlugin = (): ReturnType<LanguageServerPlugin> =>
  * Vue plugin
  */
 
-import * as vue from '@volar/vue-language-service';
-import * as vueCore from '@volar/vue-language-core';
+import * as vue from '@vue/language-server/out/languageServerPlugin';
 
-const vuePlugin: LanguageServerPlugin = (options: TypeScriptWebServerOptions): ReturnType<LanguageServerPlugin> => {
+const vuePlugin: LanguageServerPlugin = (options: TypeScriptWebServerOptions, modules): ReturnType<LanguageServerPlugin> => {
 	if (!options.supportVue) {
 		return emptyPluginInstance;
 	}
-	return {
-		extraFileExtensions: [{ extension: 'vue', isMixedContent: true, scriptKind: 7 }],
-		watchFileExtensions: ['vue'],
-		resolveConfig(config, modules, ctx) {
-
-			const ts = modules.typescript;
-			if (!ts || !options.supportVue) {
-				return config;
-			}
-
-			let vueOptions: Partial<vue.VueCompilerOptions> = {};
-			if (typeof ctx?.project.tsConfig === 'string') {
-				vueOptions = vueCore.createParsedCommandLine(ts, ctx.sys, ctx.project.tsConfig, []).vueOptions;
-			}
-
-			return vue.resolveConfig(
-				config,
-				ts,
-				ctx?.host.getCompilationSettings() ?? {},
-				vueOptions,
-			);
-		},
-	};
+	return vue.createServerPlugin(connection)(options, modules);
 };
 
 /**
- * Svelte plugin
+ * Astro plugin
  */
 
-import * as svelte from '@volar-examples/svelte-language-core';
+// import * as astro from '@astrojs/language-server/dist/languageServerPlugin';
 
-const sveltePlugin: LanguageServerPlugin = (options: TypeScriptWebServerOptions): ReturnType<LanguageServerPlugin> => {
-	if (!options.supportSvelte) {
-		return emptyPluginInstance;
-	}
-	return {
-		extraFileExtensions: [{ extension: 'svelte', isMixedContent: true, scriptKind: 7 }],
-		watchFileExtensions: ['svelte'],
-		resolveConfig(config) {
-			config.languages ??= {};
-			config.languages.svelte ??= svelte.languageModule;
-			return config;
-		},
-	};
-};
-
-/**
- * Angular plugin
- */
-
-import * as angular from '@volar-examples/angular-language-server';
-
-const angularPlugin: LanguageServerPlugin = (options: TypeScriptWebServerOptions): ReturnType<LanguageServerPlugin> => {
-	if (!options.supportAngular) {
-		return emptyPluginInstance;
-	}
-	return {
-		extraFileExtensions: [{ extension: 'html', isMixedContent: true, scriptKind: 7 }],
-		watchFileExtensions: ['html'],
-		resolveConfig: angular.resolveConfig,
-	};
-};
-
-/**
- * MDX plugin
- */
-
-import * as mdx from '@mdx-language-tools/language-core';
-
-const mdxPlugin: LanguageServerPlugin = (options: TypeScriptWebServerOptions): ReturnType<LanguageServerPlugin> => {
-	if (!options.supportMdx) {
-		return emptyPluginInstance;
-	}
-	return {
-		extraFileExtensions: [{ extension: 'mdx', isMixedContent: true, scriptKind: 7 }],
-		watchFileExtensions: ['mdx'],
-		resolveConfig(config) {
-			config.plugins ??= {}
-			config.plugins.typescript ??= createTsPlugin()
-			config.plugins.css ??= createCssPlugin()
-
-			config.languages ??= {};
-			config.languages.mdx ??= mdx.MdxLanguageModule;
-
-			return config;
-		},
-	};
-};
+// const astroPlugin: LanguageServerPlugin = (options: TypeScriptWebServerOptions, modules): ReturnType<LanguageServerPlugin> => {
+// 	if (!options.supportAstro) {
+// 		return emptyPluginInstance;
+// 	}
+// 	return astro.plugin(options, modules)
+// };
 
 startLanguageServer(
 	connection,
 	basePlugin,
 	vuePlugin,
-	sveltePlugin,
-	angularPlugin,
-	mdxPlugin,
+	// astroPlugin,
 );

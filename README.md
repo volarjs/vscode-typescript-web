@@ -1,12 +1,12 @@
 # TypeScript IntelliSense for Web
 
-> TypeScript Support for Vue + Svelte + Angular + MDX on Web IDE based on [Volar.js](https://volarjs.github.io/)
+> TypeScript + Vue + Astro Support on Web IDE based on [Volar.js](https://volarjs.github.io/)
 
 ## Why?
 
 - VSCode's built-in TypeScript extension does not support across files type-check and IntelliSense on Web IDE (github.dev), this extension implements that.
 
-- Since the node_modules cannot be installed by opening the project through github.dev, type hints is almost completely lost. This extension will download the missing node_modules `.d.ts` file from CDN, and the experience is theoretically consistent with the local IDE.
+- Since the node_modules cannot be installed by opening the project through github.dev, type hints is almost completely lost. This extension will download the missing node_modules `.d.ts` file from CDN, and the experience is theoretically consistent with TypeScript Playground.
 
 ### ⚠️ Note
 
@@ -16,54 +16,22 @@
 
 Try it: https://vscode.dev/github/johnsoncodehk/volar-starter
 
-## Vue Support
-
-Since the Vue language tool is well integrated with Volar.js, this extension also integrates Vue language support with very little effort, but you don't have to worry about it, there is almost no performance loss.
-
-## Svelte + Angular + MDX Support
-
-We have previously implemented Svelte and Angular examples for Volar.js, and this extension also integrates them along with an MDX implementation from the community.
-
-- Svelte Example: https://github.com/volarjs/svelte-language-tools
-- Angular Example: https://github.com/volarjs/angular-language-tools
-- MDX Implement: Do not open source yet
-
-Note that only Vue is a mature implementation, the others are not. The extension defaults to enabling support for these 4 languages and you can disable the ones you don't use as needed.
-
-```json
-// .vscode/settings.json
-{
-    "typescript-web.supportVue": false,
-    "typescript-web.supportSvelte": false,
-    "typescript-web.supportAngular": false,
-    "typescript-web.supportMdx": false
-}
-```
-
 ## Syntax Highlighting and Grammar
 
 This extension only includes IntelliSense support; you will still need to install the corresponding extensions for syntax highlighting and grammar:
 
 - Vue: https://marketplace.visualstudio.com/items?itemName=Vue.volar
-- Svelte: https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode
-- MDX: https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx
+- Astro: https://marketplace.visualstudio.com/items?itemName=astro-build.astro-vscode
 
 ## Disable Built-in TypeScript Extension
 
 This extension and the Built-in TypeScript Extension sometimes show duplicate results, which is not a big problem, but you still can disable the Built-in TypeScript Extension yourself if you want, please refer to https://vuejs.org/guide/typescript/overview.html#volar-takeover-mode.
 
-## Check internally generated virtual code for .vue, svelte, .html, .mdx.
-
-As with the official Vue extension, you can use this extension to view virtual code in a Web IDE, simply by running the TypeScript Web (Debug): Show Virtual Files command.
-
 ## Settings
 
 - `typescript-web.supportVue`: Enable Vue support for .vue (Default true)
-- `typescript-web.supportSvelte`: Enable Svelte support for .svelte (Default true)
-- `typescript-web.supportAngular`: Enable Angular support for .html (Default true)
-- `typescript-web.supportMdx`: Enable MDX support for .mdx (Default true)
-- `typescript-web.dts.cdn`: CDN address for downloading .d.ts files (Default https://unpkg.com/)
-- `typescript-web.dts.versions`: Specify the version of modules to download (Default `{}`)
+- `typescript-web.supportAstro`: Enable Astro support for .astro (Default true)
+- `typescript-web.dts.versions`: Specify the version of modules to download (Default `{}`), example:
     ```json
     // .vscode/settings.json
     {
