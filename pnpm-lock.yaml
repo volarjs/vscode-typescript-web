@@ -12,8 +12,8 @@ devDependencies:
     specifier: latest
     version: 20.3.2
   '@types/vscode':
-    specifier: 1.79.1
-    version: 1.79.1
+    specifier: 1.67.0
+    version: 1.67.0
   '@volar/language-server':
     specifier: 1.7.9
     version: 1.7.9
@@ -219,8 +219,8 @@ packages:
     resolution: {integrity: sha512-vOBLVQeCQfIcF/2Y7eKFTqrMnizK5lRNQ7ykML/5RuwVXVWxYkgwS7xbt4B6fKCUPgbSL5FSsjHQpaGQP/dQmw==}
     dev: true
 
-  /@types/vscode@1.79.1:
-    resolution: {integrity: sha512-Ikwc4YbHABzqthrWfeAvItaAIfX9mdjMWxqNgTpGjhgOu0TMRq9LzyZ2yBK0JhYqoSjEubEPawf6zJgnl6Egtw==}
+  /@types/vscode@1.67.0:
+    resolution: {integrity: sha512-GH8BDf8cw9AC9080uneJfulhSa7KHSMI2s/CyKePXoGNos9J486w2V4YKoeNUqIEkW4hKoEAWp6/cXTwyGj47g==}
     dev: true
 
   /@volar/kit@1.7.4(typescript@5.1.3):
