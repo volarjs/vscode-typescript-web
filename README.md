@@ -8,11 +8,10 @@
 
 - Since the node_modules cannot be installed by opening the project through github.dev, type hints is almost completely lost. This extension will download the missing node_modules `.d.ts` file from CDN, and the experience is theoretically consistent with TypeScript Playground.
 
-### ⚠️ Note
+Try it:
 
-- This extension will download all `.d.ts` files that are directly and indirectly referenced from your project. If network usage is a problem to you, please don't install this extension.
-
-Try it: https://vscode.dev/github/johnsoncodehk/volar-starter
+- https://github.dev/johnsoncodehk/volar-starter
+- https://vscode.dev/github/johnsoncodehk/volar-starter
 
 ## Syntax Highlighting and Grammar
 
