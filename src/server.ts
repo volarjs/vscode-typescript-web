@@ -1,4 +1,5 @@
-import createTsService, { createJsDelivrDtsHost } from 'volar-service-typescript';
+import createTsService from 'volar-service-typescript';
+import * as cdn from '@volar/cdn';
 import { createConnection, startLanguageServer, LanguageServerPlugin } from '@volar/language-server/browser';
 import { TypeScriptWebServerOptions } from './types';
 
@@ -13,14 +14,22 @@ const emptyPluginInstance: ReturnType<LanguageServerPlugin> = {
  */
 
 const basePlugin: LanguageServerPlugin = (options: TypeScriptWebServerOptions): ReturnType<LanguageServerPlugin> => {
+
+	const jsDelivrUriResolver = cdn.createJsDelivrUriResolver('/node_modules', options.versions);
+	const jsDelivrFs = cdn.createJsDelivrFs();
+
 	return {
 		extraFileExtensions: [],
 		watchFileExtensions: ['js', 'cjs', 'mjs', 'ts', 'cts', 'mts', 'jsx', 'tsx', 'json'],
-		resolveConfig(config) {
+		resolveConfig(config, ctx) {
+
+			if (ctx?.env) {
+				cdn.decorateServiceEnvironment(ctx.env, jsDelivrUriResolver, jsDelivrFs);
+			}
+
 			config.services ??= {};
-			config.services.typescript = createTsService({
-				dtsHost: createJsDelivrDtsHost(options.versions),
-			});
+			config.services.typescript = createTsService();
+
 			return config;
 		},
 	}
