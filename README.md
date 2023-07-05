@@ -1,6 +1,6 @@
 # TypeScript IntelliSense for Web
 
-> TypeScript + Vue + Astro Support on Web IDE based on [Volar.js](https://volarjs.github.io/)
+> TypeScript + Vue Support on Web IDE based on [Volar.js](https://volarjs.github.io/)
 
 ## Why?
 
@@ -18,7 +18,6 @@ Try it:
 This extension only includes IntelliSense support; you will still need to install the corresponding extensions for syntax highlighting and grammar:
 
 - Vue: https://marketplace.visualstudio.com/items?itemName=Vue.volar
-- Astro: https://marketplace.visualstudio.com/items?itemName=astro-build.astro-vscode
 
 ## Disable Built-in TypeScript Extension
 
@@ -27,7 +26,6 @@ This extension and the Built-in TypeScript Extension sometimes show duplicate re
 ## Settings
 
 - `typescript-web.supportVue`: Enable Vue support for .vue (Default true)
-- `typescript-web.supportAstro`: Enable Astro support for .astro (Default true)
 - `typescript-web.dts.versions`: Specify the version of modules to download (Default `{}`), example:
     ```json
     // .vscode/settings.json
