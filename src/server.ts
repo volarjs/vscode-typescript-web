@@ -23,7 +23,7 @@ const basePlugin: LanguageServerPlugin = (options: TypeScriptWebServerOptions): 
 		watchFileExtensions: ['js', 'cjs', 'mjs', 'ts', 'cts', 'mts', 'jsx', 'tsx', 'json'],
 		resolveConfig(config, ctx) {
 
-			if (ctx?.env) {
+			if (ctx) {
 				cdn.decorateServiceEnvironment(ctx.env, jsDelivrUriResolver, jsDelivrFs);
 			}
 
