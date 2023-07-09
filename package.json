@@ -68,6 +68,9 @@
 				},
 				"typescript-web.dts.globals": {
 					"type": "array",
+					"items": {
+						"type": "string"
+					},
 					"default": [ "@types/node" ],
 					"description": "Automatically download the module list of the type from the cdn even if it is not imported by any script."
 				},
