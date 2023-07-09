@@ -43,6 +43,7 @@ export async function activate(context: vscode.ExtensionContext) {
 				tsdk: (await getTsdk(context)).tsdk,
 			},
 			versions: configs.versions,
+			globalModules: configs.globalModules,
 			supportVue: configs.supportVue,
 			supportAstro: configs.supportAstro,
 		} satisfies TypeScriptWebServerOptions,
@@ -86,6 +87,7 @@ function getConfigs() {
 	return {
 		// fix: Failed to execute 'postMessage' on 'Worker': #<Object> could not be cloned.
 		versions: JSON.parse(JSON.stringify(configs.get<Record<string, string>>('dts.versions'))),
+		globalModules: configs.get<string[]>('dts.globals'),
 		supportVue: configs.get<boolean>('supportVue') ?? false,
 		supportAstro: configs.get<boolean>('supportAstro') ?? false,
 	};

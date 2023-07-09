@@ -36,6 +36,7 @@ This extension and the Built-in TypeScript Extension sometimes show duplicate re
         }
     }
     ```
+- `typescript-web.dts.globals`: Automatically download the module list of the type from the cdn even if it is not imported by any script. (Default `["@types/node"]`)
 
 ---
 

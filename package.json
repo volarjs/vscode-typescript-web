@@ -66,6 +66,11 @@
 					"default": "off",
 					"description": "Traces the communication between VS Code and the language server."
 				},
+				"typescript-web.dts.globals": {
+					"type": "array",
+					"default": [ "@types/node" ],
+					"description": "Automatically download the module list of the type from the cdn even if it is not imported by any script."
+				},
 				"typescript-web.dts.versions": {
 					"type": "object",
 					"description": "Specify the version of TypeScript to use for JavaScript and TypeScript files."

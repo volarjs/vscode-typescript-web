@@ -13,7 +13,7 @@ const emptyPluginInstance: ReturnType<LanguageServerPlugin> = {
  * Base TypeScript plugin
  */
 
-const basePlugin: LanguageServerPlugin = (options: TypeScriptWebServerOptions): ReturnType<LanguageServerPlugin> => {
+const basePlugin: LanguageServerPlugin = (options: TypeScriptWebServerOptions, modules): ReturnType<LanguageServerPlugin> => {
 
 	const jsDelivrUriResolver = cdn.createJsDelivrUriResolver('/node_modules', options.versions);
 	const jsDelivrFs = cdn.createJsDelivrFs();
@@ -25,6 +25,35 @@ const basePlugin: LanguageServerPlugin = (options: TypeScriptWebServerOptions): 
 
 			if (ctx) {
 				cdn.decorateServiceEnvironment(ctx.env, jsDelivrUriResolver, jsDelivrFs);
+			}
+
+			if (options.globalModules) {
+				config.languages ??= {};
+				config.languages.globalEnv = {
+					createVirtualFile() {
+						return undefined;
+					},
+					updateVirtualFile() { },
+					resolveHost(host) {
+						const text = (options.globalModules ?? []).map(name => `/// <reference types="${name}" />`).join('\n');
+						const snapshot = modules.typescript!.ScriptSnapshot.fromString(text);
+						return {
+							...host,
+							getScriptFileNames() {
+								return [
+									...host.getScriptFileNames(),
+									'/global.d.ts',
+								];
+							},
+							getScriptSnapshot(fileName) {
+								if (fileName === '/global.d.ts') {
+									return snapshot;
+								}
+								return host.getScriptSnapshot(fileName);
+							}
+						};
+					},
+				}
 			}
 
 			config.services ??= {};
