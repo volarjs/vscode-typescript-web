@@ -1,7 +1,7 @@
 {
 	"private": true,
 	"name": "vscode-typescript-web",
-	"version": "0.0.20",
+	"version": "0.0.29",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/volarjs/vscode-typescript-web.git"
@@ -71,7 +71,9 @@
 					"items": {
 						"type": "string"
 					},
-					"default": [ "@types/node" ],
+					"default": [
+						"@types/node"
+					],
 					"description": "Automatically download the module list of the type from the cdn even if it is not imported by any script."
 				},
 				"typescript-web.dts.versions": {
