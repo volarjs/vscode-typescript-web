@@ -102,13 +102,12 @@
 		"chrome": "vscode-test-web --browserType=chromium --extensionDevelopmentPath=. ../volar-starter"
 	},
 	"devDependencies": {
-		"@types/node": "latest",
 		"@types/vscode": "^1.82.0",
-		"@volar/cdn": "~1.10.6",
-		"@volar/language-server": "~1.10.6",
-		"@volar/language-service": "~1.10.6",
-		"@volar/typescript": "~1.10.6",
-		"@volar/vscode": "~1.10.6",
+		"@volar/cdn": "~1.10.7",
+		"@volar/language-server": "~1.10.7",
+		"@volar/language-service": "~1.10.7",
+		"@volar/typescript": "~1.10.7",
+		"@volar/vscode": "~1.10.7",
 		"@vscode/test-web": "latest",
 		"@vscode/vsce": "latest",
 		"@vue/language-server": "1.8.22",
