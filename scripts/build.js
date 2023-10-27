@@ -1,78 +1,64 @@
-require('esbuild').build({
-	entryPoints: {
-		client: './out/client.js',
-	},
-	bundle: true,
-	outdir: './dist',
-	external: ['vscode'],
-	format: 'cjs',
-	tsconfig: './tsconfig.json',
-	minify: process.argv.includes('--minify'),
-	watch: process.argv.includes('--watch'),
-	plugins: [
-		{
-			name: 'node-deps',
-			setup(build) {
-				build.onResolve({ filter: /^\@vue\/.*$/ }, args => {
-					const pathUmdMay = require.resolve(args.path, { paths: [args.resolveDir] })
-					const pathEsm = pathUmdMay.replace('.cjs.', '.esm-browser.')
-					return { path: pathEsm }
-				})
-				build.onResolve({ filter: /^path$/ }, args => {
-					const path = require.resolve('../node_modules/path-browserify', { paths: [__dirname] })
-					return { path: path }
-				})
-			},
+Promise.all([
+	require('esbuild').context({
+		entryPoints: {
+			client: './src/client.ts',
 		},
-		// require('esbuild-plugin-copy').copy({
-		// 	resolveFrom: 'cwd',
-		// 	assets: {
-		// 		from: ['./node_modules/typescript/lib/lib*.d.ts'],
-		// 		to: ['./dist/typescript'],
-		// 	},
-		// 	keepStructure: true,
-		// })
-	],
-}).catch(() => process.exit(1))
-
-require('esbuild').build({
-	entryPoints: {
-		server: './out/server.js'
-	},
-	bundle: true,
-	outdir: './dist',
-	external: ['fs'],
-	format: 'iife',
-	tsconfig: './tsconfig.json',
-	inject: ['./scripts/process-shim.js'],
-	minify: process.argv.includes('--minify'),
-	watch: process.argv.includes('--watch'),
-	plugins: [
-		{
-			name: 'node-deps',
-			setup(build) {
-				build.onResolve({ filter: /^vscode-.*-languageservice$/ }, args => {
-					const pathUmdMay = require.resolve(args.path, { paths: [args.resolveDir] })
-					const pathEsm = pathUmdMay.replace('/umd/', '/esm/')
-					return { path: pathEsm }
-				})
-				build.onResolve({ filter: /^path$/ }, args => {
-					const path = require.resolve('../node_modules/path-browserify', { paths: [__dirname] })
-					return { path: path }
-				})
-				build.onResolve({ filter: /^url$/ }, args => {
-					const path = require.resolve('../node_modules/url', { paths: [__dirname] })
-					return { path: path }
-				})
-				build.onResolve({ filter: /^punycode$/ }, args => {
-					const path = require.resolve('../node_modules/punycode', { paths: [__dirname] })
-					return { path: path }
-				})
-				build.onResolve({ filter: /^assert$/ }, args => {
-					const path = require.resolve('../node_modules/assert', { paths: [__dirname] })
-					return { path: path }
-				})
+		sourcemap: true,
+		bundle: true,
+		outdir: './dist',
+		external: ['vscode'],
+		format: 'cjs',
+		tsconfig: './tsconfig.json',
+		minify: process.argv.includes('--minify'),
+		plugins: [
+			{
+				name: 'node-deps',
+				setup(build) {
+					build.onResolve({ filter: /^path$/ }, args => {
+						const path = require.resolve('../node_modules/path-browserify', { paths: [__dirname] })
+						return { path: path }
+					})
+				},
 			},
+		],
+	}),
+	require('esbuild').context({
+		entryPoints: {
+			server: './src/server.ts',
 		},
-	],
-}).catch(() => process.exit(1))
+		sourcemap: true,
+		bundle: true,
+		outdir: './dist',
+		external: ['fs'],
+		format: 'iife',
+		tsconfig: './tsconfig.json',
+		minify: process.argv.includes('--minify'),
+		plugins: [
+			{
+				name: 'node-deps',
+				setup(build) {
+					build.onResolve({ filter: /^(vscode-.*-languageservice|jsonc-parser)/ }, args => {
+						const pathUmdMay = require.resolve(args.path, { paths: [args.resolveDir] });
+						// Call twice the replace is to solve the problem of the path in Windows
+						const pathEsm = pathUmdMay.replace('/umd/', '/esm/').replace('\\umd\\', '\\esm\\');
+						return { path: pathEsm };
+					});
+					build.onResolve({ filter: /^path$/ }, args => {
+						const path = require.resolve('../node_modules/path-browserify', { paths: [__dirname] })
+						return { path: path }
+					})
+				},
+			},
+		],
+	}),
+]).then(ctxs => {
+	console.log('building...');
+	if (process.argv.includes('--watch')) {
+		Promise.all(ctxs.map(ctx => ctx.watch()));
+		console.log('watching...');
+	} else {
+		Promise.all(ctxs.map(ctx => ctx.rebuild()));
+		Promise.all(ctxs.map(ctx => ctx.dispose()));
+		console.log('finished.');
+	}
+});

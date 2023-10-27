@@ -18,7 +18,7 @@
 	"author": "johnsoncodehk",
 	"publisher": "johnsoncodehk",
 	"engines": {
-		"vscode": "^1.67.0"
+		"vscode": "^1.82.0"
 	},
 	"activationEvents": [
 		"onLanguage:vue",
@@ -94,11 +94,8 @@
 		}
 	},
 	"scripts": {
-		"prebuild": "tsc -b",
 		"build": "node scripts/build",
-		"watch": "npm run build && (npm run watch:base & npm run watch:vscode)",
-		"watch:base": "tsc -b -w",
-		"watch:vscode": "npm run build -- --watch",
+		"watch": "npm run build -- --watch",
 		"pack": "npm run build && vsce package --no-dependencies",
 		"release": "npm run build && vsce publish --no-dependencies --target web",
 		"pre-release": "npm run build && vsce publish --no-dependencies --target web --pre-release",
@@ -106,24 +103,21 @@
 	},
 	"devDependencies": {
 		"@types/node": "latest",
-		"@types/vscode": "1.67.0",
-		"@volar/cdn": "~1.10.0",
-		"@volar/language-server": "~1.10.0",
-		"@volar/language-service": "~1.10.0",
-		"@volar/typescript": "~1.10.0",
-		"@volar/vscode": "~1.10.0",
-		"@vue/language-server": "1.8.8",
-		"volar-service-typescript": "0.0.11",
+		"@types/vscode": "^1.82.0",
+		"@volar/cdn": "~1.10.6",
+		"@volar/language-server": "~1.10.6",
+		"@volar/language-service": "~1.10.6",
+		"@volar/typescript": "~1.10.6",
+		"@volar/vscode": "~1.10.6",
 		"@vscode/test-web": "latest",
-		"esbuild": "0.15.18",
+		"@vscode/vsce": "latest",
+		"@vue/language-server": "1.8.22",
+		"esbuild": "latest",
 		"esbuild-plugin-copy": "latest",
 		"esbuild-plugin-polyfill-node": "^0.3.0",
 		"path-browserify": "^1.0.1",
-		"punycode": "^2.3.0",
-		"typescript": "5.1.3",
-		"util": "^0.12.5",
-		"url": "^0.11.1",
-		"vsce": "latest",
-		"vscode-languageclient": "^8.1.0"
+		"typescript": "latest",
+		"volar-service-typescript": "0.0.15",
+		"vscode-languageclient": "^9.0.1"
 	}
 }
