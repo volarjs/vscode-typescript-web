@@ -103,20 +103,18 @@
 	},
 	"devDependencies": {
 		"@types/vscode": "^1.82.0",
-		"@volar/cdn": "~1.10.7",
-		"@volar/language-server": "~1.10.7",
-		"@volar/language-service": "~1.10.7",
-		"@volar/typescript": "~1.10.7",
-		"@volar/vscode": "~1.10.7",
+		"@volar/cdn": "~1.10.10",
+		"@volar/language-server": "~1.10.10",
+		"@volar/language-service": "~1.10.10",
+		"@volar/typescript": "~1.10.10",
+		"@volar/vscode": "~1.10.10",
 		"@vscode/test-web": "latest",
 		"@vscode/vsce": "latest",
-		"@vue/language-server": "1.8.22",
+		"@vue/language-server": "1.9.0-alpha.2",
 		"esbuild": "latest",
 		"esbuild-plugin-copy": "latest",
-		"esbuild-plugin-polyfill-node": "^0.3.0",
-		"path-browserify": "^1.0.1",
 		"typescript": "latest",
-		"volar-service-typescript": "0.0.15",
+		"volar-service-typescript": "0.0.16",
 		"vscode-languageclient": "^9.0.1"
 	}
 }

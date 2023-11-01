@@ -1,13 +1,11 @@
 import * as vscode from 'vscode';
 import * as lsp from 'vscode-languageclient/browser';
 import {
-	activateTsVersionStatusItem,
 	activateFindFileReferences,
 	activateReloadProjects,
 	activateServerSys,
 	activateAutoInsertion,
 	activateTsConfigStatusItem,
-	getTsdk,
 } from '@volar/vscode';
 import type { TypeScriptWebServerOptions } from './types';
 
@@ -40,7 +38,7 @@ export async function activate(context: vscode.ExtensionContext) {
 		documentSelector,
 		initializationOptions: {
 			typescript: {
-				tsdk: (await getTsdk(context)).tsdk,
+				tsdkUrl: 'https://cdn.jsdelivr.net/npm/typescript@latest',
 			},
 			versions: configs.versions,
 			globalModules: configs.globalModules,
@@ -56,21 +54,6 @@ export async function activate(context: vscode.ExtensionContext) {
 	);
 	await client.start();
 
-	activateTsVersionStatusItem(
-		'typescript-web.ts-version',
-		context,
-		client,
-		documentFilter,
-		text => {
-			const langs: string[] = [];
-
-			if (configs.supportVue) langs.push('vue');
-			if (configs.supportAstro) langs.push('astro');
-
-			return langs.length ? `${text} (${langs.join(', ')})` : text;
-		},
-		true,
-	);
 	activateFindFileReferences('typescript-web.find-file-references', client);
 	activateReloadProjects('typescript-web.reload-projects', [client]);
 	activateServerSys(client);

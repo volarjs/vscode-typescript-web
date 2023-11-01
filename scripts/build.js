@@ -10,17 +10,6 @@ Promise.all([
 		format: 'cjs',
 		tsconfig: './tsconfig.json',
 		minify: process.argv.includes('--minify'),
-		plugins: [
-			{
-				name: 'node-deps',
-				setup(build) {
-					build.onResolve({ filter: /^path$/ }, args => {
-						const path = require.resolve('../node_modules/path-browserify', { paths: [__dirname] })
-						return { path: path }
-					})
-				},
-			},
-		],
 	}),
 	require('esbuild').context({
 		entryPoints: {
@@ -29,7 +18,6 @@ Promise.all([
 		sourcemap: true,
 		bundle: true,
 		outdir: './dist',
-		external: ['fs'],
 		format: 'iife',
 		tsconfig: './tsconfig.json',
 		minify: process.argv.includes('--minify'),
@@ -43,22 +31,18 @@ Promise.all([
 						const pathEsm = pathUmdMay.replace('/umd/', '/esm/').replace('\\umd\\', '\\esm\\');
 						return { path: pathEsm };
 					});
-					build.onResolve({ filter: /^path$/ }, args => {
-						const path = require.resolve('../node_modules/path-browserify', { paths: [__dirname] })
-						return { path: path }
-					})
 				},
 			},
 		],
 	}),
-]).then(ctxs => {
+]).then(async ctxs => {
 	console.log('building...');
 	if (process.argv.includes('--watch')) {
-		Promise.all(ctxs.map(ctx => ctx.watch()));
+		await Promise.all(ctxs.map(ctx => ctx.watch()));
 		console.log('watching...');
 	} else {
-		Promise.all(ctxs.map(ctx => ctx.rebuild()));
-		Promise.all(ctxs.map(ctx => ctx.dispose()));
+		await Promise.all(ctxs.map(ctx => ctx.rebuild()));
+		await Promise.all(ctxs.map(ctx => ctx.dispose()));
 		console.log('finished.');
 	}
 });
