@@ -44,13 +44,6 @@
 				]
 			}
 		],
-		"commands": [
-			{
-				"command": "typescript-web.show-virtual-files",
-				"title": "Show Virtual Files",
-				"category": "TypeScript Web (Debug)"
-			}
-		],
 		"configuration": {
 			"type": "object",
 			"title": "TypeScript Web",
