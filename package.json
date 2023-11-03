@@ -1,7 +1,7 @@
 {
 	"private": true,
 	"name": "vscode-typescript-web",
-	"version": "0.0.51",
+	"version": "0.0.52",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/volarjs/vscode-typescript-web.git"
