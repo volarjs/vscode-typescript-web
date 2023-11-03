@@ -1,5 +1,4 @@
 import * as vscode from 'vscode';
-import * as lsp from 'vscode-languageclient/browser';
 import {
 	activateFindFileReferences,
 	activateReloadProjects,
@@ -7,6 +6,7 @@ import {
 	activateAutoInsertion,
 	activateTsConfigStatusItem,
 } from '@volar/vscode';
+import * as lsp from '@volar/vscode/browser';
 import type { TypeScriptWebServerOptions } from './types';
 
 let client: lsp.BaseLanguageClient | undefined;
@@ -38,7 +38,7 @@ export async function activate(context: vscode.ExtensionContext) {
 		documentSelector,
 		initializationOptions: {
 			typescript: {
-				tsdkUrl: 'https://cdn.jsdelivr.net/npm/typescript@latest',
+				tsdkUrl: 'https://cdn.jsdelivr.net/npm/typescript@latest/lib',
 			},
 			versions: configs.versions,
 			globalModules: configs.globalModules,
