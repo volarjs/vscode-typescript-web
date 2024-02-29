@@ -96,17 +96,16 @@
 	},
 	"devDependencies": {
 		"@types/vscode": "^1.82.0",
-		"@volar/cdn": "~1.11.0",
-		"@volar/language-server": "~1.11.0",
-		"@volar/language-service": "~1.11.0",
-		"@volar/typescript": "~1.11.0",
-		"@volar/vscode": "~1.11.0",
+		"@volar/language-server": "~2.1.0",
+		"@volar/language-service": "~2.1.0",
+		"@volar/typescript": "~2.1.0",
+		"@volar/vscode": "~2.1.0",
 		"@vscode/test-web": "latest",
 		"@vscode/vsce": "latest",
 		"@vue/language-server": "1.9.0-alpha.3",
 		"esbuild": "latest",
 		"esbuild-plugin-copy": "latest",
 		"typescript": "latest",
-		"volar-service-typescript": "0.0.17"
+		"volar-service-typescript": "0.0.31"
 	}
 }

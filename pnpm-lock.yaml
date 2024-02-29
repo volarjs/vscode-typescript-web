@@ -8,21 +8,18 @@ devDependencies:
   '@types/vscode':
     specifier: ^1.82.0
     version: 1.83.1
-  '@volar/cdn':
-    specifier: ~1.11.0
-    version: 1.11.0
   '@volar/language-server':
-    specifier: ~1.11.0
-    version: 1.11.0
+    specifier: ~2.1.0
+    version: 2.1.0
   '@volar/language-service':
-    specifier: ~1.11.0
-    version: 1.11.0
+    specifier: ~2.1.0
+    version: 2.1.0
   '@volar/typescript':
-    specifier: ~1.11.0
-    version: 1.11.0
+    specifier: ~2.1.0
+    version: 2.1.0
   '@volar/vscode':
-    specifier: ~1.11.0
-    version: 1.11.0
+    specifier: ~2.1.0
+    version: 2.1.0
   '@vscode/test-web':
     specifier: latest
     version: 0.0.48
@@ -42,8 +39,8 @@ devDependencies:
     specifier: latest
     version: 5.2.2
   volar-service-typescript:
-    specifier: 0.0.17
-    version: 0.0.17(@volar/language-service@1.11.0)(@volar/typescript@1.11.0)
+    specifier: 0.0.31
+    version: 0.0.31(@volar/language-service@2.1.0)(@volar/typescript@2.1.0)
 
 packages:
 
@@ -345,16 +342,16 @@ packages:
     resolution: {integrity: sha512-BHu51NaNKOtDf3BOonY3sKFFmZKEpRkzqkZVpSYxowLbs5JqjOQemYFob7Gs5rpxE5tiGhfpnMpcdF/oKrLg4w==}
     dev: true
 
-  /@volar/cdn@1.11.0:
-    resolution: {integrity: sha512-ffGLg0DJgV5sXIGOgOPQ7dTiJjwmbAmfN1DlmQ6IWZoZBJ7foDBgkhA/+4nuNRpnekQL/LCL/PKoQQDg/tMxMw==}
-    dependencies:
-      '@volar/language-service': 1.11.0
-    dev: true
-
   /@volar/language-core@1.11.0:
     resolution: {integrity: sha512-AT9dp0yNpOi5YAlUUWs/UBWMvs0y4cG4yDzgSoyhrt7I0RbM/rxr4JZ1+HOL0rMSOKqmik97Jog4wAAWeAE/Dg==}
     dependencies:
       '@volar/source-map': 1.11.0
+    dev: true
+
+  /@volar/language-core@2.1.0:
+    resolution: {integrity: sha512-BrYEgYHx92ocpt1OUxJs2x3TAXEjpPLxsQoARb96g2GdF62xnfRQUqCNBwiU7Z3MQ/0tOAdqdHNYNmrFtx6q4A==}
+    dependencies:
+      '@volar/source-map': 2.1.0
     dev: true
 
   /@volar/language-server@1.11.0:
@@ -363,6 +360,22 @@ packages:
       '@volar/language-core': 1.11.0
       '@volar/language-service': 1.11.0
       '@volar/typescript': 1.11.0
+      '@vscode/l10n': 0.0.16
+      path-browserify: 1.0.1
+      request-light: 0.7.0
+      vscode-languageserver: 9.0.1
+      vscode-languageserver-protocol: 3.17.5
+      vscode-languageserver-textdocument: 1.0.11
+      vscode-uri: 3.0.8
+    dev: true
+
+  /@volar/language-server@2.1.0:
+    resolution: {integrity: sha512-7ODGLqlEhlS4kpVyOqHjRh1CLOUHdoIt8/y3pXaqB/ytrl7ZghEQzblYUREpg5iAY7+5FeN53uJ9edjWMXmsfQ==}
+    dependencies:
+      '@volar/language-core': 2.1.0
+      '@volar/language-service': 2.1.0
+      '@volar/snapshot-document': 2.1.0
+      '@volar/typescript': 2.1.0
       '@vscode/l10n': 0.0.16
       path-browserify: 1.0.1
       request-light: 0.7.0
@@ -382,10 +395,32 @@ packages:
       vscode-uri: 3.0.8
     dev: true
 
+  /@volar/language-service@2.1.0:
+    resolution: {integrity: sha512-3BEv8acsPC+ey2Yuecm9lSZp3AT6xq5Tj71TYXoo/TglumHRIa/y0uEIvK4b9okVJo4hgBX0kj9opbgIQrNTtA==}
+    dependencies:
+      '@volar/language-core': 2.1.0
+      vscode-languageserver-protocol: 3.17.5
+      vscode-languageserver-textdocument: 1.0.11
+      vscode-uri: 3.0.8
+    dev: true
+
+  /@volar/snapshot-document@2.1.0:
+    resolution: {integrity: sha512-7foa5nJ6YGCRUFcafJ8HX9GUfMIi5m/FnOT2mmWH1aBuCnZKu5gTH+2wkpsiyXkuqGlaNHq5q7tu+KL9TUmkpA==}
+    dependencies:
+      vscode-languageserver-protocol: 3.17.5
+      vscode-languageserver-textdocument: 1.0.11
+    dev: true
+
   /@volar/source-map@1.11.0:
     resolution: {integrity: sha512-tbqO0ruTyOn7c2SQCSBAwpQpkKmU4sOj4GV5kMyja+NAtmbmLmNGmqaNNs8yVZzLQQ1cx+xguYb2Ol+oHGMxaQ==}
     dependencies:
       muggle-string: 0.3.1
+    dev: true
+
+  /@volar/source-map@2.1.0:
+    resolution: {integrity: sha512-VPyi+DTv67cvUOkUewzsOQJY3VUhjOjQxigT487z/H7tEI8ZFd5RksC5afk3JelOK+a/3Y8LRDbKmYKu1dz87g==}
+    dependencies:
+      muggle-string: 0.4.1
     dev: true
 
   /@volar/typescript@1.11.0:
@@ -395,10 +430,17 @@ packages:
       path-browserify: 1.0.1
     dev: true
 
-  /@volar/vscode@1.11.0:
-    resolution: {integrity: sha512-obYcD7EHsrGJz26b34M3grJHZQtwC6VEgFOiHC3rC2Ij4InQuY2Mfa9h/S3gxBvmegWqoTbdEvpJOdDTvNQIRA==}
+  /@volar/typescript@2.1.0:
+    resolution: {integrity: sha512-2cicVoW4q6eU/omqfOBv+6r9JdrF5bBelujbJhayPNKiOj/xwotSJ/DM8IeMvTZvtkOZkm6suyOCLEokLY0w2w==}
     dependencies:
-      '@volar/language-server': 1.11.0
+      '@volar/language-core': 2.1.0
+      path-browserify: 1.0.1
+    dev: true
+
+  /@volar/vscode@2.1.0:
+    resolution: {integrity: sha512-fJ760pydWAohRJ5PCjZ1M1xDLQhO9Nw0hmQKLo2kI7EEdHc94s+duWI9l0Dz5CVXtkKAkTtW8a48KmGP0Scs+g==}
+    dependencies:
+      '@volar/language-server': 2.1.0
       path-browserify: 1.0.1
       vscode-languageclient: 9.0.1
       vscode-nls: 5.2.0
@@ -1694,6 +1736,10 @@ packages:
     resolution: {integrity: sha512-ckmWDJjphvd/FvZawgygcUeQCxzvohjFO5RxTjj4eq8kw359gFF3E1brjfI+viLMxss5JrHTDRHZvu2/tuy0Qg==}
     dev: true
 
+  /muggle-string@0.4.1:
+    resolution: {integrity: sha512-VNTrAak/KhO2i8dqqnqnAHOa3cYBwXEZe9h+D5h/1ZqFSTEFHdM65lR7RoIqq3tBBYavsOXV84NoHXZ0AkPyqQ==}
+    dev: true
+
   /mute-stream@0.0.8:
     resolution: {integrity: sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==}
     dev: true
@@ -2260,6 +2306,12 @@ packages:
       semver: 7.5.4
     dev: true
 
+  /typescript-auto-import-cache@0.3.2:
+    resolution: {integrity: sha512-+laqe5SFL1vN62FPOOJSUDTZxtgsoOXjneYOXIpx5rQ4UMiN89NAtJLpqLqyebv9fgQ/IMeeTX+mQyRnwvJzvg==}
+    dependencies:
+      semver: 7.5.4
+    dev: true
+
   /typescript@5.2.2:
     resolution: {integrity: sha512-mI4WrpHsbCIcwT9cF4FZvr80QUeKvsUsUvKDoR+X/7XHQH98xYD8YHZg7ANtz2GtZt/CBq2QJ0thkGJMHfqc1w==}
     engines: {node: '>=14.17'}
@@ -2397,6 +2449,24 @@ packages:
       vscode-languageserver-textdocument: 1.0.11
       vscode-nls: 5.2.0
       vscode-uri: 3.0.8
+    dev: true
+
+  /volar-service-typescript@0.0.31(@volar/language-service@2.1.0)(@volar/typescript@2.1.0):
+    resolution: {integrity: sha512-gaSsX0NmWgENPx6KrHcj+Xru4iQWDpt1kLJcWYNJZ5XaMawYFlVXjWGX/lCO6P7AoLoc2NQnTYUpgTfTjbqdaQ==}
+    peerDependencies:
+      '@volar/language-service': ~2.1.0
+      '@volar/typescript': ~2.1.0
+    peerDependenciesMeta:
+      '@volar/language-service':
+        optional: true
+    dependencies:
+      '@volar/language-service': 2.1.0
+      '@volar/typescript': 2.1.0
+      path-browserify: 1.0.1
+      semver: 7.5.4
+      typescript-auto-import-cache: 0.3.2
+      vscode-languageserver-textdocument: 1.0.11
+      vscode-nls: 5.2.0
     dev: true
 
   /vscode-css-languageservice@6.2.10:
