@@ -2,9 +2,9 @@ import { createNpmFileSystem } from '@volar/jsdelivr';
 import { createConnection, createServer, createTypeScriptProject, Disposable, LanguagePlugin, LanguageServicePlugin, loadTsdkByUrl } from '@volar/language-server/browser';
 import { createParsedCommandLine, createVueLanguagePlugin, FileMap, getFullLanguageServicePlugins, resolveVueCompilerOptions, VueCompilerOptions } from '@vue/language-service';
 import type * as ts from 'typescript';
-import { create as createTypeScriptServicePlugin } from 'volar-service-typescript';
-import { URI } from 'vscode-uri';
-import { TypeScriptWebServerOptions } from './types';
+import { create as createTypeScriptServicePlugins } from 'volar-service-typescript';
+import type { URI } from 'vscode-uri';
+import type { TypeScriptWebServerOptions } from './types';
 
 const connection = createConnection();
 const server = createServer(connection);
@@ -15,7 +15,7 @@ connection.onInitialize(async params => {
 	const ataSys = createNpmFileSystem();
 	const languageServicePlugins: LanguageServicePlugin[] = [];
 	const watchingExtensions = new Set<string>();
-	
+
 	let fileWatcher: Promise<Disposable> | undefined;
 
 	if (supportVue) {
@@ -25,7 +25,7 @@ connection.onInitialize(async params => {
 	}
 	else {
 		// @ts-expect-error
-		languageServicePlugins.push(...createTypeScriptServicePlugin(tsdk.typescript));
+		languageServicePlugins.push(...createTypeScriptServicePlugins(tsdk.typescript));
 	}
 
 	return server.initialize(
@@ -34,6 +34,7 @@ connection.onInitialize(async params => {
 			tsdk.typescript,
 			tsdk.diagnosticMessages,
 			async ({ env, asFileName, projectHost, sys, configFileName }) => {
+				const { fs } = env;
 				env.fs = {
 					async stat(uri) {
 						return await ataSys.stat(uri) ?? await env.fs?.stat(uri);
