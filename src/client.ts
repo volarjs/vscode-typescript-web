@@ -1,12 +1,12 @@
-import * as vscode from 'vscode';
 import {
+	activateAutoInsertion,
 	activateFindFileReferences,
 	activateReloadProjects,
 	activateServerSys,
-	activateAutoInsertion,
 	activateTsConfigStatusItem,
 } from '@volar/vscode';
 import * as lsp from '@volar/vscode/browser';
+import * as vscode from 'vscode';
 import type { TypeScriptWebServerOptions } from './types';
 
 let client: lsp.BaseLanguageClient | undefined;
