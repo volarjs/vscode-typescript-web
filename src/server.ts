@@ -37,16 +37,16 @@ connection.onInitialize(async params => {
 				const { fs } = env;
 				env.fs = {
 					async stat(uri) {
-						return await ataSys.stat(uri) ?? await env.fs?.stat(uri);
+						return await ataSys.stat(uri) ?? await fs?.stat(uri);
 					},
 					async readDirectory(uri) {
 						return [
 							...await ataSys.readDirectory(uri),
-							... await env.fs?.readDirectory(uri) ?? [],
+							... await fs?.readDirectory(uri) ?? [],
 						];
 					},
 					async readFile(uri) {
-						return await ataSys.readFile(uri) ?? await env.fs?.readFile(uri);
+						return await ataSys.readFile(uri) ?? await fs?.readFile(uri);
 					},
 				}
 				const plugins: LanguagePlugin<URI>[] = [];
