@@ -50,6 +50,16 @@ export async function activate(context: vscode.ExtensionContext) {
 	activateServerSys(client);
 	activateAutoInsertion(documentSelector, client);
 	activateTsConfigStatusItem(documentSelector, 'typescript-web.tsconfig', client);
+
+	context.subscriptions.push(
+		vscode.workspace.registerTextDocumentContentProvider('vscode-typescript-web', {
+			provideTextDocumentContent(uri: vscode.Uri) {
+				if (uri.authority === 'cdn') {
+					return client?.sendRequest<string>('$/cdnFileContent', uri.toString());
+				}
+			},
+		})
+	);
 }
 
 export function deactivate() {

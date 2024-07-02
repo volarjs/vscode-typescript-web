@@ -8,17 +8,17 @@ import type { TypeScriptWebServerOptions } from './types';
 
 const connection = createConnection();
 const server = createServer(connection);
+const ataSys = createNpmFileSystem(getCdnPath);
 
 function getCdnPath(uri: URI) {
-	if (uri.scheme === 'https' && uri.authority === 'cdn.jsdelivr.net' && uri.path.startsWith('/npm/')) {
-		return uri.path.slice('/npm/'.length);
+	if (uri.scheme === 'vscode-typescript-web' && uri.authority === 'cdn' && uri.path.startsWith('/')) {
+		return uri.path.slice('/'.length);
 	}
 }
 
 connection.onInitialize(async params => {
 	const { globalModules, supportVue, typescript }: TypeScriptWebServerOptions = params.initializationOptions;
 	const tsdk = await loadTsdkByUrl(typescript.tsdkUrl, params.locale);
-	const ataSys = createNpmFileSystem(getCdnPath);
 	const languageServicePlugins = createTypeScriptServicePlugins(tsdk.typescript);
 	const watchingExtensions = new Set<string>();
 
@@ -41,16 +41,17 @@ connection.onInitialize(async params => {
 				const { asFileName, asUri } = uriConverter;
 				uriConverter.asUri = (fileName) => {
 					if (fileName === '/node_modules') {
-						return URI.parse('https://cdn.jsdelivr.net/npm/');
+						return URI.parse('vscode-typescript-web://cdn/');
 					}
 					if (fileName.startsWith('/node_modules/')) {
-						return URI.parse('https://cdn.jsdelivr.net/npm/' + fileName.slice('/node_modules/'.length));
+						return URI.parse('vscode-typescript-web://cdn/' + fileName.slice('/node_modules/'.length));
 					}
 					return asUri(fileName);
 				};
 				uriConverter.asFileName = (uri) => {
-					if (getCdnPath(uri) !== undefined) {
-						return '/node_modules' + uri.path.slice('/npm'.length);
+					const cdnPath = getCdnPath(uri);
+					if (cdnPath !== undefined) {
+						return '/node_modules/' + cdnPath;
 					}
 					return asFileName(uri);
 				};
@@ -150,6 +151,10 @@ connection.onInitialize(async params => {
 connection.onInitialized(server.initialized);
 
 connection.onShutdown(server.shutdown);
+
+connection.onRequest('$/cdnFileContent', async (uri: string) => {
+	return ataSys.readFile(URI.parse(uri));
+});
 
 connection.listen();
 
