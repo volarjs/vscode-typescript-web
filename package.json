@@ -1,7 +1,7 @@
 {
 	"private": true,
 	"name": "vscode-typescript-web",
-	"version": "0.0.54",
+	"version": "0.0.55",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/volarjs/vscode-typescript-web.git"
@@ -105,7 +105,7 @@
 		"esbuild": "latest",
 		"esbuild-plugin-copy": "latest",
 		"typescript": "latest",
-		"volar-service-typescript": "0.0.58",
+		"volar-service-typescript": "volar-2.4",
 		"vscode-uri": "^3.0.8"
 	},
 	"packageManager": "pnpm@9.4.0"
