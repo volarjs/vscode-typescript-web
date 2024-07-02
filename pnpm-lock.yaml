@@ -12,14 +12,14 @@ importers:
         specifier: ^1.82.0
         version: 1.90.0
       '@volar/jsdelivr':
-        specifier: ~2.4.0-alpha.11
-        version: 2.4.0-alpha.11
+        specifier: ~2.4.0-alpha.12
+        version: 2.4.0-alpha.12
       '@volar/language-server':
-        specifier: ~2.4.0-alpha.11
-        version: 2.4.0-alpha.11
+        specifier: ~2.4.0-alpha.12
+        version: 2.4.0-alpha.12
       '@volar/vscode':
-        specifier: ~2.4.0-alpha.11
-        version: 2.4.0-alpha.11
+        specifier: ~2.4.0-alpha.12
+        version: 2.4.0-alpha.12
       '@vscode/test-web':
         specifier: latest
         version: 0.0.55
@@ -27,20 +27,20 @@ importers:
         specifier: latest
         version: 2.29.0
       '@vue/language-service':
-        specifier: 2.0.24
-        version: 2.0.24(typescript@5.5.3)
+        specifier: 2.0.26-alpha.2
+        version: 2.0.26-alpha.2(typescript@5.5.3)
       esbuild:
         specifier: latest
-        version: 0.22.0
+        version: 0.23.0
       esbuild-plugin-copy:
         specifier: latest
-        version: 2.1.1(esbuild@0.22.0)
+        version: 2.1.1(esbuild@0.23.0)
       typescript:
         specifier: latest
         version: 5.5.3
       volar-service-typescript:
-        specifier: 0.0.57
-        version: 0.0.57(@volar/language-service@2.4.0-alpha.11)
+        specifier: 0.0.58
+        version: 0.0.58(@volar/language-service@2.4.0-alpha.12)
       vscode-uri:
         specifier: ^3.0.8
         version: 3.0.8
@@ -133,146 +133,146 @@ packages:
   '@emmetio/stream-reader@2.2.0':
     resolution: {integrity: sha512-fXVXEyFA5Yv3M3n8sUGT7+fvecGrZP4k6FnWWMSZVQf69kAq0LLpaBQLGcPR30m3zMmKYhECP4k/ZkzvhEW5kw==}
 
-  '@esbuild/aix-ppc64@0.22.0':
-    resolution: {integrity: sha512-uvQR2crZ/zgzSHDvdygHyNI+ze9zwS8mqz0YtGXotSqvEE0UkYE9s+FZKQNTt1VtT719mfP3vHrUdCpxBNQZhQ==}
+  '@esbuild/aix-ppc64@0.23.0':
+    resolution: {integrity: sha512-3sG8Zwa5fMcA9bgqB8AfWPQ+HFke6uD3h1s3RIwUNK8EG7a4buxvuFTs3j1IMs2NXAk9F30C/FF4vxRgQCcmoQ==}
     engines: {node: '>=18'}
     cpu: [ppc64]
     os: [aix]
 
-  '@esbuild/android-arm64@0.22.0':
-    resolution: {integrity: sha512-UKhPb3o2gAB/bfXcl58ZXTn1q2oVu1rEu/bKrCtmm+Nj5MKUbrOwR5WAixE2v+lk0amWuwPvhnPpBRLIGiq7ig==}
+  '@esbuild/android-arm64@0.23.0':
+    resolution: {integrity: sha512-EuHFUYkAVfU4qBdyivULuu03FhJO4IJN9PGuABGrFy4vUuzk91P2d+npxHcFdpUnfYKy0PuV+n6bKIpHOB3prQ==}
     engines: {node: '>=18'}
     cpu: [arm64]
     os: [android]
 
-  '@esbuild/android-arm@0.22.0':
-    resolution: {integrity: sha512-PBnyP+r8vJE4ifxsWys9l+Mc2UY/yYZOpX82eoyGISXXb3dRr0M21v+s4fgRKWMFPMSf/iyowqPW/u7ScSUkjQ==}
+  '@esbuild/android-arm@0.23.0':
+    resolution: {integrity: sha512-+KuOHTKKyIKgEEqKbGTK8W7mPp+hKinbMBeEnNzjJGyFcWsfrXjSTNluJHCY1RqhxFurdD8uNXQDei7qDlR6+g==}
     engines: {node: '>=18'}
     cpu: [arm]
     os: [android]
 
-  '@esbuild/android-x64@0.22.0':
-    resolution: {integrity: sha512-IjTYtvIrjhR41Ijy2dDPgYjQHWG/x/A4KXYbs1fiU3efpRdoxMChK3oEZV6GPzVEzJqxFgcuBaiX1kwEvWUxSw==}
+  '@esbuild/android-x64@0.23.0':
+    resolution: {integrity: sha512-WRrmKidLoKDl56LsbBMhzTTBxrsVwTKdNbKDalbEZr0tcsBgCLbEtoNthOW6PX942YiYq8HzEnb4yWQMLQuipQ==}
     engines: {node: '>=18'}
     cpu: [x64]
     os: [android]
 
-  '@esbuild/darwin-arm64@0.22.0':
-    resolution: {integrity: sha512-mqt+Go4y9wRvEz81bhKd9RpHsQR1LwU8Xm6jZRUV/xpM7cIQFbFH6wBCLPTNsdELBvfoHeumud7X78jQQJv2TA==}
+  '@esbuild/darwin-arm64@0.23.0':
+    resolution: {integrity: sha512-YLntie/IdS31H54Ogdn+v50NuoWF5BDkEUFpiOChVa9UnKpftgwzZRrI4J132ETIi+D8n6xh9IviFV3eXdxfow==}
     engines: {node: '>=18'}
     cpu: [arm64]
     os: [darwin]
 
-  '@esbuild/darwin-x64@0.22.0':
-    resolution: {integrity: sha512-vTaTQ9OgYc3VTaWtOE5pSuDT6H3d/qSRFRfSBbnxFfzAvYoB3pqKXA0LEbi/oT8GUOEAutspfRMqPj2ezdFaMw==}
+  '@esbuild/darwin-x64@0.23.0':
+    resolution: {integrity: sha512-IMQ6eme4AfznElesHUPDZ+teuGwoRmVuuixu7sv92ZkdQcPbsNHzutd+rAfaBKo8YK3IrBEi9SLLKWJdEvJniQ==}
     engines: {node: '>=18'}
     cpu: [x64]
     os: [darwin]
 
-  '@esbuild/freebsd-arm64@0.22.0':
-    resolution: {integrity: sha512-0e1ZgoobJzaGnR4reD7I9rYZ7ttqdh1KPvJWnquUoDJhL0rYwdneeLailBzd2/4g/U5p4e5TIHEWa68NF2hFpQ==}
+  '@esbuild/freebsd-arm64@0.23.0':
+    resolution: {integrity: sha512-0muYWCng5vqaxobq6LB3YNtevDFSAZGlgtLoAc81PjUfiFz36n4KMpwhtAd4he8ToSI3TGyuhyx5xmiWNYZFyw==}
     engines: {node: '>=18'}
     cpu: [arm64]
     os: [freebsd]
 
-  '@esbuild/freebsd-x64@0.22.0':
-    resolution: {integrity: sha512-BFgyYwlCwRWyPQJtkzqq2p6pJbiiWgp0P9PNf7a5FQ1itKY4czPuOMAlFVItirSmEpRPCeImuwePNScZS0pL5Q==}
+  '@esbuild/freebsd-x64@0.23.0':
+    resolution: {integrity: sha512-XKDVu8IsD0/q3foBzsXGt/KjD/yTKBCIwOHE1XwiXmrRwrX6Hbnd5Eqn/WvDekddK21tfszBSrE/WMaZh+1buQ==}
     engines: {node: '>=18'}
     cpu: [x64]
     os: [freebsd]
 
-  '@esbuild/linux-arm64@0.22.0':
-    resolution: {integrity: sha512-V/K2rctCUgC0PCXpN7AqT4hoazXKgIYugFGu/myk2+pfe6jTW2guz/TBwq4cZ7ESqusR/IzkcQaBkcjquuBWsw==}
+  '@esbuild/linux-arm64@0.23.0':
+    resolution: {integrity: sha512-j1t5iG8jE7BhonbsEg5d9qOYcVZv/Rv6tghaXM/Ug9xahM0nX/H2gfu6X6z11QRTMT6+aywOMA8TDkhPo8aCGw==}
     engines: {node: '>=18'}
     cpu: [arm64]
     os: [linux]
 
-  '@esbuild/linux-arm@0.22.0':
-    resolution: {integrity: sha512-KEMWiA9aGuPUD4BH5yjlhElLgaRXe+Eri6gKBoDazoPBTo1BXc/e6IW5FcJO9DoL19FBeCxgONyh95hLDNepIg==}
+  '@esbuild/linux-arm@0.23.0':
+    resolution: {integrity: sha512-SEELSTEtOFu5LPykzA395Mc+54RMg1EUgXP+iw2SJ72+ooMwVsgfuwXo5Fn0wXNgWZsTVHwY2cg4Vi/bOD88qw==}
     engines: {node: '>=18'}
     cpu: [arm]
     os: [linux]
 
-  '@esbuild/linux-ia32@0.22.0':
-    resolution: {integrity: sha512-r2ZZqkOMOrpUhzNwxI7uLAHIDwkfeqmTnrv1cjpL/rjllPWszgqmprd/om9oviKXUBpMqHbXmppvjAYgISb26Q==}
+  '@esbuild/linux-ia32@0.23.0':
+    resolution: {integrity: sha512-P7O5Tkh2NbgIm2R6x1zGJJsnacDzTFcRWZyTTMgFdVit6E98LTxO+v8LCCLWRvPrjdzXHx9FEOA8oAZPyApWUA==}
     engines: {node: '>=18'}
     cpu: [ia32]
     os: [linux]
 
-  '@esbuild/linux-loong64@0.22.0':
-    resolution: {integrity: sha512-qaowLrV/YOMAL2RfKQ4C/VaDzAuLDuylM2sd/LH+4OFirMl6CuDpRlCq4u49ZBaVV8pkI/Y+hTdiibvQRhojCA==}
+  '@esbuild/linux-loong64@0.23.0':
+    resolution: {integrity: sha512-InQwepswq6urikQiIC/kkx412fqUZudBO4SYKu0N+tGhXRWUqAx+Q+341tFV6QdBifpjYgUndV1hhMq3WeJi7A==}
     engines: {node: '>=18'}
     cpu: [loong64]
     os: [linux]
 
-  '@esbuild/linux-mips64el@0.22.0':
-    resolution: {integrity: sha512-hgrezzjQTRxjkQ5k08J6rtZN5PNnkWx/Rz6Kmj9gnsdCAX1I4Dn4ZPqvFRkXo55Q3pnVQJBwbdtrTO7tMGtyVA==}
+  '@esbuild/linux-mips64el@0.23.0':
+    resolution: {integrity: sha512-J9rflLtqdYrxHv2FqXE2i1ELgNjT+JFURt/uDMoPQLcjWQA5wDKgQA4t/dTqGa88ZVECKaD0TctwsUfHbVoi4w==}
     engines: {node: '>=18'}
     cpu: [mips64el]
     os: [linux]
 
-  '@esbuild/linux-ppc64@0.22.0':
-    resolution: {integrity: sha512-ewxg6FLLUio883XgSjfULEmDl3VPv/TYNnRprVAS3QeGFLdCYdx1tIudBcd7n9jIdk82v1Ajov4jx87qW7h9+g==}
+  '@esbuild/linux-ppc64@0.23.0':
+    resolution: {integrity: sha512-cShCXtEOVc5GxU0fM+dsFD10qZ5UpcQ8AM22bYj0u/yaAykWnqXJDpd77ublcX6vdDsWLuweeuSNZk4yUxZwtw==}
     engines: {node: '>=18'}
     cpu: [ppc64]
     os: [linux]
 
-  '@esbuild/linux-riscv64@0.22.0':
-    resolution: {integrity: sha512-Az5XbgSJC2lE8XK8pdcutsf9RgdafWdTpUK/+6uaDdfkviw/B4JCwAfh1qVeRWwOohwdsl4ywZrWBNWxwrPLFg==}
+  '@esbuild/linux-riscv64@0.23.0':
+    resolution: {integrity: sha512-HEtaN7Y5UB4tZPeQmgz/UhzoEyYftbMXrBCUjINGjh3uil+rB/QzzpMshz3cNUxqXN7Vr93zzVtpIDL99t9aRw==}
     engines: {node: '>=18'}
     cpu: [riscv64]
     os: [linux]
 
-  '@esbuild/linux-s390x@0.22.0':
-    resolution: {integrity: sha512-8j4a2ChT9+V34NNNY9c/gMldutaJFmfMacTPq4KfNKwv2fitBCLYjee7c+Vxaha2nUhPK7cXcZpJtJ3+Y7ZdVQ==}
+  '@esbuild/linux-s390x@0.23.0':
+    resolution: {integrity: sha512-WDi3+NVAuyjg/Wxi+o5KPqRbZY0QhI9TjrEEm+8dmpY9Xir8+HE/HNx2JoLckhKbFopW0RdO2D72w8trZOV+Wg==}
     engines: {node: '>=18'}
     cpu: [s390x]
     os: [linux]
 
-  '@esbuild/linux-x64@0.22.0':
-    resolution: {integrity: sha512-JUQyOnpbAkkRFOk/AhsEemz5TfWN4FJZxVObUlnlNCbe7QBl61ZNfM4cwBXayQA6laMJMUcqLHaYQHAB6YQ95Q==}
+  '@esbuild/linux-x64@0.23.0':
+    resolution: {integrity: sha512-a3pMQhUEJkITgAw6e0bWA+F+vFtCciMjW/LPtoj99MhVt+Mfb6bbL9hu2wmTZgNd994qTAEw+U/r6k3qHWWaOQ==}
     engines: {node: '>=18'}
     cpu: [x64]
     os: [linux]
 
-  '@esbuild/netbsd-x64@0.22.0':
-    resolution: {integrity: sha512-11PoCoHXo4HFNbLsXuMB6bpMPWGDiw7xETji6COdJss4SQZLvcgNoeSqWtATRm10Jj1uEHiaIk4N0PiN6x4Fcg==}
+  '@esbuild/netbsd-x64@0.23.0':
+    resolution: {integrity: sha512-cRK+YDem7lFTs2Q5nEv/HHc4LnrfBCbH5+JHu6wm2eP+d8OZNoSMYgPZJq78vqQ9g+9+nMuIsAO7skzphRXHyw==}
     engines: {node: '>=18'}
     cpu: [x64]
     os: [netbsd]
 
-  '@esbuild/openbsd-arm64@0.22.0':
-    resolution: {integrity: sha512-Ezlhu/YyITmXwKSB+Zu/QqD7cxrjrpiw85cc0Rbd3AWr2wsgp+dWbWOE8MqHaLW9NKMZvuL0DhbJbvzR7F6Zvg==}
+  '@esbuild/openbsd-arm64@0.23.0':
+    resolution: {integrity: sha512-suXjq53gERueVWu0OKxzWqk7NxiUWSUlrxoZK7usiF50C6ipColGR5qie2496iKGYNLhDZkPxBI3erbnYkU0rQ==}
     engines: {node: '>=18'}
     cpu: [arm64]
     os: [openbsd]
 
-  '@esbuild/openbsd-x64@0.22.0':
-    resolution: {integrity: sha512-ufjdW5tFJGUjlH9j/5cCE9lrwRffyZh+T4vYvoDKoYsC6IXbwaFeV/ENxeNXcxotF0P8CDzoICXVSbJaGBhkrw==}
+  '@esbuild/openbsd-x64@0.23.0':
+    resolution: {integrity: sha512-6p3nHpby0DM/v15IFKMjAaayFhqnXV52aEmv1whZHX56pdkK+MEaLoQWj+H42ssFarP1PcomVhbsR4pkz09qBg==}
     engines: {node: '>=18'}
     cpu: [x64]
     os: [openbsd]
 
-  '@esbuild/sunos-x64@0.22.0':
-    resolution: {integrity: sha512-zY6ly/AoSmKnmNTowDJsK5ehra153/5ZhqxNLfq9NRsTTltetr+yHHcQ4RW7QDqw4JC8A1uC1YmeSfK9NRcK1w==}
+  '@esbuild/sunos-x64@0.23.0':
+    resolution: {integrity: sha512-BFelBGfrBwk6LVrmFzCq1u1dZbG4zy/Kp93w2+y83Q5UGYF1d8sCzeLI9NXjKyujjBBniQa8R8PzLFAUrSM9OA==}
     engines: {node: '>=18'}
     cpu: [x64]
     os: [sunos]
 
-  '@esbuild/win32-arm64@0.22.0':
-    resolution: {integrity: sha512-Kml5F7tv/1Maam0pbbCrvkk9vj046dPej30kFzlhXnhuCtYYBP6FGy/cLbc5yUT1lkZznGLf2OvuvmLjscO5rw==}
+  '@esbuild/win32-arm64@0.23.0':
+    resolution: {integrity: sha512-lY6AC8p4Cnb7xYHuIxQ6iYPe6MfO2CC43XXKo9nBXDb35krYt7KGhQnOkRGar5psxYkircpCqfbNDB4uJbS2jQ==}
     engines: {node: '>=18'}
     cpu: [arm64]
     os: [win32]
 
-  '@esbuild/win32-ia32@0.22.0':
-    resolution: {integrity: sha512-IOgwn+mYTM3RrcydP4Og5IpXh+ftN8oF+HELTXSmbWBlujuci4Qa3DTeO+LEErceisI7KUSfEIiX+WOUlpELkw==}
+  '@esbuild/win32-ia32@0.23.0':
+    resolution: {integrity: sha512-7L1bHlOTcO4ByvI7OXVI5pNN6HSu6pUQq9yodga8izeuB1KcT2UkHaH6118QJwopExPn0rMHIseCTx1CRo/uNA==}
     engines: {node: '>=18'}
     cpu: [ia32]
     os: [win32]
 
-  '@esbuild/win32-x64@0.22.0':
-    resolution: {integrity: sha512-4bDHJrk2WHBXJPhy1y80X7/5b5iZTZP3LGcKIlAP1J+KqZ4zQAPMLEzftGyjjfcKbA4JDlPt/+2R/F1ZTeRgrw==}
+  '@esbuild/win32-x64@0.23.0':
+    resolution: {integrity: sha512-Arm+WgUFLUATuoxCJcahGuk6Yj9Pzxd6l11Zb/2aAuv5kWWvvfhLFo2fni4uSK5vzlUdCGZ/BdV5tH8klj8p8g==}
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
@@ -307,29 +307,29 @@ packages:
   '@types/vscode@1.90.0':
     resolution: {integrity: sha512-oT+ZJL7qHS9Z8bs0+WKf/kQ27qWYR3trsXpq46YDjFqBsMLG4ygGGjPaJ2tyrH0wJzjOEmDyg9PDJBBhWg9pkQ==}
 
-  '@volar/jsdelivr@2.4.0-alpha.11':
-    resolution: {integrity: sha512-ac7kRQEvUEqiO1L18LrzHch7BSCoCtRupMngQiZzZEAwbWQn4SskpioW02cgw1gE8YF8Rx9715nUo7c2mfnk+w==}
+  '@volar/jsdelivr@2.4.0-alpha.12':
+    resolution: {integrity: sha512-GJuuvAdK9DO2oGLT+v/ZardVaTXQc+gNPlfdq4zbtYoc4ViPcrbfEM3weLpg4cm/Cj6iCSoXq/m+m48z417eoA==}
 
-  '@volar/language-core@2.4.0-alpha.11':
-    resolution: {integrity: sha512-DtftH0DtpksK1y+de/kLnu8CHcFQ7huKXi7cyxH9R0PbOOTSGXd31kijBeKNzyoXRp8dqGpu/7WhOlCWXQR62w==}
+  '@volar/language-core@2.4.0-alpha.12':
+    resolution: {integrity: sha512-Dj9qTifcGGgzFLfMbU5dCo13kHyNuEyvPJhtWDnoVBBmgwW3GMwFmgWnNxBhjf63m5x0gux1okaxX2CLN7qSww==}
 
-  '@volar/language-server@2.4.0-alpha.11':
-    resolution: {integrity: sha512-I81j5e74Q7NLCkarp2FEvi1PypC+fgqA/phHTkf8hli76uF0veHoAVY5mu7BvKgxFKFCWmk672BMj7efax4Xzw==}
+  '@volar/language-server@2.4.0-alpha.12':
+    resolution: {integrity: sha512-GRzN4Sa8ANv+6o2WZxg/KHnWvJEtH6VIgLXTWv5Rsihs/PZw5Xz6/s4cWuIU4xfsqv9rjkogaTc26L9ZiD+HpQ==}
 
-  '@volar/language-service@2.4.0-alpha.11':
-    resolution: {integrity: sha512-gw2ZhZNHRG+WUWn5GoROKq94w+gj2Z19/E53ALaXcuALbwKFxkQilpjayYsbTJskGy8hOg8K0ogkY5e2EXJPmg==}
+  '@volar/language-service@2.4.0-alpha.12':
+    resolution: {integrity: sha512-R6MQ/qOlKqBvc7LmdV+K/f64uuAa5zJpyYHpKLzuR0y4iKvWKblxwzggumII6XLBGFwkgMoW3v2RIIz1WXxTqg==}
 
-  '@volar/snapshot-document@2.4.0-alpha.11':
-    resolution: {integrity: sha512-TsTEitdl9TqEuxKldmgQccJ+5xxFhwIhuHqv19eK/qzCHpsonTj3ML7zlhGRxgVlbMaKAItX0ThHzFGyPzlOaA==}
+  '@volar/snapshot-document@2.4.0-alpha.12':
+    resolution: {integrity: sha512-3wmiXJFBCPRTxLOMJ8KpFptSka0MxJV1FXojjLQnnW+VIOCdc25YKyh3jaRX4v6MzxmSRKp6c6g3pM44l/V5LQ==}
 
-  '@volar/source-map@2.4.0-alpha.11':
-    resolution: {integrity: sha512-yyjmv8KUkTcxXzwme9qUMl6Szdji9JUQa8eadE4ib/spFXXZGq6QOX8cgSu5UQ0ooyBJFO1zdVH5otBJyZE3Ew==}
+  '@volar/source-map@2.4.0-alpha.12':
+    resolution: {integrity: sha512-LXATFSj4D7T9sEm7FFj6iBgHjKjrdhAgRPcechVKiNCMQdr3r3GVkkeu8aM+1peaMH3LsCqoDxVZEmh2r7CHiw==}
 
-  '@volar/typescript@2.4.0-alpha.11':
-    resolution: {integrity: sha512-N/v+wSddhtsNtfv2w0Bxj2QQWURN5budGzpyBTrlcXxz2dnvB0eAMqrEQbBi6rCOVHlRaXbh+wyTRdAcB/FHrg==}
+  '@volar/typescript@2.4.0-alpha.12':
+    resolution: {integrity: sha512-mLg+OQauMTv/+08a7WBWJo1sev/wc8t2is0zhBZIlFU+j5mG89FM4+4089c2p/zoUFZ400Q/VNg2BPfhpZ8wSA==}
 
-  '@volar/vscode@2.4.0-alpha.11':
-    resolution: {integrity: sha512-pRsXxuw43N8RVjwLRvM3q29Dju3LnC6hZBCWDCCysUciY+duwgjyejkvW2gPgPHwPoPe6gknw2xr6s4sn9/Dqg==}
+  '@volar/vscode@2.4.0-alpha.12':
+    resolution: {integrity: sha512-imw8tk5N0JYxO865azLacv8Y4E8AbpNqGgwPAJVq6BPyL1+C9Bj1K816/Yv+ZztHAdZrkhBTxEFjmU5uoe1toQ==}
 
   '@vscode/emmet-helper@2.9.3':
     resolution: {integrity: sha512-rB39LHWWPQYYlYfpv9qCoZOVioPCftKXXqrsyqN1mTWZM6dTnONT63Db+03vgrBbHzJN45IrgS/AGxw9iiqfEw==}
@@ -401,22 +401,22 @@ packages:
   '@vue/compiler-dom@3.4.31':
     resolution: {integrity: sha512-wK424WMXsG1IGMyDGyLqB+TbmEBFM78hIsOJ9QwUVLGrcSk0ak6zYty7Pj8ftm7nEtdU/DGQxAXp0/lM/2cEpQ==}
 
-  '@vue/language-core@2.0.24':
-    resolution: {integrity: sha512-997YD6Lq/66LXr3ZOLNxDCmyn13z9NP8LU1UZn9hGCDWhzlbXAIP0hOgL3w3x4RKEaWTaaRtsHP9DzHvmduruQ==}
+  '@vue/language-core@2.0.26-alpha.2':
+    resolution: {integrity: sha512-r4Sn6Eo/xjRAS0REPy0SDZGz9rhaWOZqffonXo4Q4wx6qcepWTxK9m9/DF2b9pUflh8pB1iTeDJ7mskhZvD4iQ==}
     peerDependencies:
       typescript: '*'
     peerDependenciesMeta:
       typescript:
         optional: true
 
-  '@vue/language-service@2.0.24':
-    resolution: {integrity: sha512-CoiTPlc73I/LCji9rnI0Z89GVBOoejUfBzIzEg+6TFw8Eelp2fncgLAvgR8vmOWRVaLn0XgmL2wa0jgtLLderg==}
+  '@vue/language-service@2.0.26-alpha.2':
+    resolution: {integrity: sha512-BuK1StiuDA6Umuomp9mQGeUo1iHfDlw+TC8lp0kqT46m8VyGmJ3BEcwMafik2aH2I9+weHZxkRyrAjOo3ykV+g==}
 
   '@vue/shared@3.4.31':
     resolution: {integrity: sha512-Yp3wtJk//8cO4NItOPpi3QkLExAr/aLBGZMmTtW9WpdwBCJpRM6zj9WgWktXAl8IDIozwNMByT45JP3tO3ACWA==}
 
-  '@vue/typescript-plugin@2.0.24':
-    resolution: {integrity: sha512-UjC6iKiyJ1pn0CbcsDW3IyiNb7z7vtABI3b9tDZ8xLGDvVLduZ0qwzq22b5jg2cVEIhLdjbQ4quaEoZflltfTw==}
+  '@vue/typescript-plugin@2.0.26-alpha.2':
+    resolution: {integrity: sha512-SoPpb8pdTGf9esEFbHceY7lKnIe8WOL/jVIH3kO06c5njyT9kza9YC2qYxO8JB8Gpb6mEvBS9KVYZqSQ/a/gYw==}
 
   accepts@1.3.8:
     resolution: {integrity: sha512-PYAthTa2m2VKxuvSD3DPC/Gy+U+sOA1LAuT8mkmRuvw+NACSaeXEQ+NHcVF7rONl6qcaxV3Uuemwawk+7+SJLw==}
@@ -735,8 +735,8 @@ packages:
     peerDependencies:
       esbuild: '>= 0.14.0'
 
-  esbuild@0.22.0:
-    resolution: {integrity: sha512-zNYA6bFZsVnsU481FnGAQjLDW0Pl/8BGG7EvAp15RzUvGC+ME7hf1q7LvIfStEQBz/iEHuBJCYcOwPmNCf1Tlw==}
+  esbuild@0.23.0:
+    resolution: {integrity: sha512-1lvV17H2bMYda/WaFb2jLPeHU3zml2k4/yagNMG8Q/YtfMjCwEUZa2eXXMgZTVSL5q1n4H7sQ0X6CdJDqqeCFA==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -1472,69 +1472,61 @@ packages:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
 
-  volar-service-css@0.0.56:
-    resolution: {integrity: sha512-Pdbk5QayLNWJislbik4Lo0QLLyd4pTqcgZCE2gaEQp9ozHCtrRNj3vY7KAh4BTgfiOqTSAj/UhViOXVAtdF3yg==}
+  volar-service-css@0.0.58:
+    resolution: {integrity: sha512-Nz8s7J/R59M7vLV74JgCFSwPGNOgsgrbJYq+XiHAW7O3eUCbM7MrHnCaW/mPaLlEgRPL9TLiWX3VO0B0D4f7iQ==}
     peerDependencies:
-      '@volar/language-service': ~2.4.0-alpha.1
+      '@volar/language-service': ~2.4.0-alpha.12
     peerDependenciesMeta:
       '@volar/language-service':
         optional: true
 
-  volar-service-emmet@0.0.56:
-    resolution: {integrity: sha512-2WqvOMTYBOpNAHtEWj0C9d8Wyco8aY4KL+9lfdFCWJd7RYU6R6mIlbrvcdSP2De8b5Z7gwTCUm6Kcjt8qOCvjQ==}
+  volar-service-emmet@0.0.58:
+    resolution: {integrity: sha512-KYN61xp7+z80QOCbT+V2x/WONVGIN8fZ1qTkujtng78lbHVeS3JqCe1sXw20nHWddxakybib7oG8Za81GMFa1w==}
     peerDependencies:
-      '@volar/language-service': ~2.4.0-alpha.1
+      '@volar/language-service': ~2.4.0-alpha.12
     peerDependenciesMeta:
       '@volar/language-service':
         optional: true
 
-  volar-service-html@0.0.56:
-    resolution: {integrity: sha512-OwDRiASNqFxAFdO55CZ0/XKnPt7WGw8CoaM/g6QzExikPZ92ySbK/kvh1zi6WR3w+hP6C4BNeVITzOk9tjgNGw==}
+  volar-service-html@0.0.58:
+    resolution: {integrity: sha512-X9A7iFXS/KX5Rddcg7H89Th5Eq/iAudwiv6vOSSCkw9JhLAUh4b3Lx/7SbL5MTXqgZMPDw4VqpfWXX3aML6d1Q==}
     peerDependencies:
-      '@volar/language-service': ~2.4.0-alpha.1
+      '@volar/language-service': ~2.4.0-alpha.12
     peerDependenciesMeta:
       '@volar/language-service':
         optional: true
 
-  volar-service-json@0.0.56:
-    resolution: {integrity: sha512-eYXfOYTJLOw9UeA2YNtxGp/Lgu4pKk9u72I/HI+TcqLdMJKoXpOwLF6nUEhZVTy9LqTSRF0QvgXFa4q4mcLwIg==}
+  volar-service-json@0.0.58:
+    resolution: {integrity: sha512-tP2cC8UAuP3RM6IZNDipK46dIdFq3MDizgMuLPPKzzAvCtrQlcTDhxknJzgMsmq92PjRTpwDZr6KDTGZknfgTQ==}
     peerDependencies:
-      '@volar/language-service': ~2.4.0-alpha.1
+      '@volar/language-service': ~2.4.0-alpha.12
     peerDependenciesMeta:
       '@volar/language-service':
         optional: true
 
-  volar-service-pug-beautify@0.0.56:
-    resolution: {integrity: sha512-ai79ljMfKH2bjcVjUET0zAwpVjDNtMCjizkttxCkNHCMTYIc1muhHIEj1+nNAw4zrDT51lxZgW6OJMTXQ+BW9A==}
+  volar-service-pug-beautify@0.0.58:
+    resolution: {integrity: sha512-AoEsBiFWA1XL3NiWNMMM1hyXcRn5TSVHEMo8BfQPVz3NrGtPChHqp7XI/RX7N3b7zVSzwrajWJ+iFTUOZDE0Bg==}
     peerDependencies:
-      '@volar/language-service': ~2.4.0-alpha.1
+      '@volar/language-service': ~2.4.0-alpha.12
     peerDependenciesMeta:
       '@volar/language-service':
         optional: true
 
-  volar-service-pug@0.0.56:
-    resolution: {integrity: sha512-NaobSQiuAFBTzBE7YHAyHyCZXqVNFFbXvuXTtXsJP6LR1lvBWg7IUgg45kzV1OS146qq2cmY3lryhlNRHwCmmg==}
+  volar-service-pug@0.0.58:
+    resolution: {integrity: sha512-Fre9qwYaIgcGUZfzSaoXGUVNYZqYRNnsc84wBCgwtRhdgZj7jxo6b/0FKUj9Dwv8bBM+xrX1IHLQECOMOnzC7Q==}
 
-  volar-service-typescript-twoslash-queries@0.0.56:
-    resolution: {integrity: sha512-VqOp3xQucUzLpJCOEQcAiAUlbv6c1laTbFsM/pc06S/+l78eHPDbnivoSwL+0MKbNoLwLsS5w0OwBfwQ2Dn2Jg==}
+  volar-service-typescript-twoslash-queries@0.0.58:
+    resolution: {integrity: sha512-DDErD3sQDXx4Pf0dVYrNgYQvN8iZdToWzdu8Aaxnjg4mvxT7yaizcn+KBDtcNSy4jksOHa4ut4R7AxZJ68Fyfg==}
     peerDependencies:
-      '@volar/language-service': ~2.4.0-alpha.1
+      '@volar/language-service': ~2.4.0-alpha.12
     peerDependenciesMeta:
       '@volar/language-service':
         optional: true
 
-  volar-service-typescript@0.0.56:
-    resolution: {integrity: sha512-p16fn61j4IiNLhLl7ZxdnRRDpRLWiqIRhZm1xLgek4JshCCy5Z7KShYG6LVZXK3hNvXxM8f61PIl0KDCCzStKA==}
+  volar-service-typescript@0.0.58:
+    resolution: {integrity: sha512-r4MVuRlerFzMwpiN8VWumBULuBxcNUCURptnkCPEcypw8N0GjxPBvq5vXOTGRcukKihgY6mvgYKmJMrkQvbmtQ==}
     peerDependencies:
-      '@volar/language-service': ~2.4.0-alpha.1
-    peerDependenciesMeta:
-      '@volar/language-service':
-        optional: true
-
-  volar-service-typescript@0.0.57:
-    resolution: {integrity: sha512-HCCi1533nYIjoA6VA28di+TPxFXDD5JfgwfSQS57UpAyVEQmB3ds8yiNjyfHwlI5iQD/2I3tw6eql47yj5xRKw==}
-    peerDependencies:
-      '@volar/language-service': ~2.4.0-alpha.11
+      '@volar/language-service': ~2.4.0-alpha.12
     peerDependenciesMeta:
       '@volar/language-service':
         optional: true
@@ -1731,76 +1723,76 @@ snapshots:
 
   '@emmetio/stream-reader@2.2.0': {}
 
-  '@esbuild/aix-ppc64@0.22.0':
+  '@esbuild/aix-ppc64@0.23.0':
     optional: true
 
-  '@esbuild/android-arm64@0.22.0':
+  '@esbuild/android-arm64@0.23.0':
     optional: true
 
-  '@esbuild/android-arm@0.22.0':
+  '@esbuild/android-arm@0.23.0':
     optional: true
 
-  '@esbuild/android-x64@0.22.0':
+  '@esbuild/android-x64@0.23.0':
     optional: true
 
-  '@esbuild/darwin-arm64@0.22.0':
+  '@esbuild/darwin-arm64@0.23.0':
     optional: true
 
-  '@esbuild/darwin-x64@0.22.0':
+  '@esbuild/darwin-x64@0.23.0':
     optional: true
 
-  '@esbuild/freebsd-arm64@0.22.0':
+  '@esbuild/freebsd-arm64@0.23.0':
     optional: true
 
-  '@esbuild/freebsd-x64@0.22.0':
+  '@esbuild/freebsd-x64@0.23.0':
     optional: true
 
-  '@esbuild/linux-arm64@0.22.0':
+  '@esbuild/linux-arm64@0.23.0':
     optional: true
 
-  '@esbuild/linux-arm@0.22.0':
+  '@esbuild/linux-arm@0.23.0':
     optional: true
 
-  '@esbuild/linux-ia32@0.22.0':
+  '@esbuild/linux-ia32@0.23.0':
     optional: true
 
-  '@esbuild/linux-loong64@0.22.0':
+  '@esbuild/linux-loong64@0.23.0':
     optional: true
 
-  '@esbuild/linux-mips64el@0.22.0':
+  '@esbuild/linux-mips64el@0.23.0':
     optional: true
 
-  '@esbuild/linux-ppc64@0.22.0':
+  '@esbuild/linux-ppc64@0.23.0':
     optional: true
 
-  '@esbuild/linux-riscv64@0.22.0':
+  '@esbuild/linux-riscv64@0.23.0':
     optional: true
 
-  '@esbuild/linux-s390x@0.22.0':
+  '@esbuild/linux-s390x@0.23.0':
     optional: true
 
-  '@esbuild/linux-x64@0.22.0':
+  '@esbuild/linux-x64@0.23.0':
     optional: true
 
-  '@esbuild/netbsd-x64@0.22.0':
+  '@esbuild/netbsd-x64@0.23.0':
     optional: true
 
-  '@esbuild/openbsd-arm64@0.22.0':
+  '@esbuild/openbsd-arm64@0.23.0':
     optional: true
 
-  '@esbuild/openbsd-x64@0.22.0':
+  '@esbuild/openbsd-x64@0.23.0':
     optional: true
 
-  '@esbuild/sunos-x64@0.22.0':
+  '@esbuild/sunos-x64@0.23.0':
     optional: true
 
-  '@esbuild/win32-arm64@0.22.0':
+  '@esbuild/win32-arm64@0.23.0':
     optional: true
 
-  '@esbuild/win32-ia32@0.22.0':
+  '@esbuild/win32-ia32@0.23.0':
     optional: true
 
-  '@esbuild/win32-x64@0.22.0':
+  '@esbuild/win32-x64@0.23.0':
     optional: true
 
   '@johnsoncodehk/pug-beautify@0.2.2': {}
@@ -1837,18 +1829,18 @@ snapshots:
 
   '@types/vscode@1.90.0': {}
 
-  '@volar/jsdelivr@2.4.0-alpha.11': {}
+  '@volar/jsdelivr@2.4.0-alpha.12': {}
 
-  '@volar/language-core@2.4.0-alpha.11':
+  '@volar/language-core@2.4.0-alpha.12':
     dependencies:
-      '@volar/source-map': 2.4.0-alpha.11
+      '@volar/source-map': 2.4.0-alpha.12
 
-  '@volar/language-server@2.4.0-alpha.11':
+  '@volar/language-server@2.4.0-alpha.12':
     dependencies:
-      '@volar/language-core': 2.4.0-alpha.11
-      '@volar/language-service': 2.4.0-alpha.11
-      '@volar/snapshot-document': 2.4.0-alpha.11
-      '@volar/typescript': 2.4.0-alpha.11
+      '@volar/language-core': 2.4.0-alpha.12
+      '@volar/language-service': 2.4.0-alpha.12
+      '@volar/snapshot-document': 2.4.0-alpha.12
+      '@volar/typescript': 2.4.0-alpha.12
       path-browserify: 1.0.1
       request-light: 0.7.0
       vscode-languageserver: 9.0.1
@@ -1856,29 +1848,29 @@ snapshots:
       vscode-languageserver-textdocument: 1.0.11
       vscode-uri: 3.0.8
 
-  '@volar/language-service@2.4.0-alpha.11':
+  '@volar/language-service@2.4.0-alpha.12':
     dependencies:
-      '@volar/language-core': 2.4.0-alpha.11
+      '@volar/language-core': 2.4.0-alpha.12
       vscode-languageserver-protocol: 3.17.5
       vscode-languageserver-textdocument: 1.0.11
       vscode-uri: 3.0.8
 
-  '@volar/snapshot-document@2.4.0-alpha.11':
+  '@volar/snapshot-document@2.4.0-alpha.12':
     dependencies:
       vscode-languageserver-protocol: 3.17.5
       vscode-languageserver-textdocument: 1.0.11
 
-  '@volar/source-map@2.4.0-alpha.11': {}
+  '@volar/source-map@2.4.0-alpha.12': {}
 
-  '@volar/typescript@2.4.0-alpha.11':
+  '@volar/typescript@2.4.0-alpha.12':
     dependencies:
-      '@volar/language-core': 2.4.0-alpha.11
+      '@volar/language-core': 2.4.0-alpha.12
       path-browserify: 1.0.1
       vscode-uri: 3.0.8
 
-  '@volar/vscode@2.4.0-alpha.11':
+  '@volar/vscode@2.4.0-alpha.12':
     dependencies:
-      '@volar/language-server': 2.4.0-alpha.11
+      '@volar/language-server': 2.4.0-alpha.12
       path-browserify: 1.0.1
       vscode-languageclient: 9.0.1
       vscode-nls: 5.2.0
@@ -1995,9 +1987,9 @@ snapshots:
       '@vue/compiler-core': 3.4.31
       '@vue/shared': 3.4.31
 
-  '@vue/language-core@2.0.24(typescript@5.5.3)':
+  '@vue/language-core@2.0.26-alpha.2(typescript@5.5.3)':
     dependencies:
-      '@volar/language-core': 2.4.0-alpha.11
+      '@volar/language-core': 2.4.0-alpha.12
       '@vue/compiler-dom': 3.4.31
       '@vue/shared': 3.4.31
       computeds: 0.0.1
@@ -2008,25 +2000,25 @@ snapshots:
     optionalDependencies:
       typescript: 5.5.3
 
-  '@vue/language-service@2.0.24(typescript@5.5.3)':
+  '@vue/language-service@2.0.26-alpha.2(typescript@5.5.3)':
     dependencies:
-      '@volar/language-core': 2.4.0-alpha.11
-      '@volar/language-service': 2.4.0-alpha.11
-      '@volar/typescript': 2.4.0-alpha.11
+      '@volar/language-core': 2.4.0-alpha.12
+      '@volar/language-service': 2.4.0-alpha.12
+      '@volar/typescript': 2.4.0-alpha.12
       '@vue/compiler-dom': 3.4.31
-      '@vue/language-core': 2.0.24(typescript@5.5.3)
+      '@vue/language-core': 2.0.26-alpha.2(typescript@5.5.3)
       '@vue/shared': 3.4.31
-      '@vue/typescript-plugin': 2.0.24(typescript@5.5.3)
+      '@vue/typescript-plugin': 2.0.26-alpha.2(typescript@5.5.3)
       computeds: 0.0.1
       path-browserify: 1.0.1
-      volar-service-css: 0.0.56(@volar/language-service@2.4.0-alpha.11)
-      volar-service-emmet: 0.0.56(@volar/language-service@2.4.0-alpha.11)
-      volar-service-html: 0.0.56(@volar/language-service@2.4.0-alpha.11)
-      volar-service-json: 0.0.56(@volar/language-service@2.4.0-alpha.11)
-      volar-service-pug: 0.0.56
-      volar-service-pug-beautify: 0.0.56(@volar/language-service@2.4.0-alpha.11)
-      volar-service-typescript: 0.0.56(@volar/language-service@2.4.0-alpha.11)
-      volar-service-typescript-twoslash-queries: 0.0.56(@volar/language-service@2.4.0-alpha.11)
+      volar-service-css: 0.0.58(@volar/language-service@2.4.0-alpha.12)
+      volar-service-emmet: 0.0.58(@volar/language-service@2.4.0-alpha.12)
+      volar-service-html: 0.0.58(@volar/language-service@2.4.0-alpha.12)
+      volar-service-json: 0.0.58(@volar/language-service@2.4.0-alpha.12)
+      volar-service-pug: 0.0.58
+      volar-service-pug-beautify: 0.0.58(@volar/language-service@2.4.0-alpha.12)
+      volar-service-typescript: 0.0.58(@volar/language-service@2.4.0-alpha.12)
+      volar-service-typescript-twoslash-queries: 0.0.58(@volar/language-service@2.4.0-alpha.12)
       vscode-html-languageservice: 5.3.0
       vscode-languageserver-textdocument: 1.0.11
       vscode-uri: 3.0.8
@@ -2035,10 +2027,10 @@ snapshots:
 
   '@vue/shared@3.4.31': {}
 
-  '@vue/typescript-plugin@2.0.24(typescript@5.5.3)':
+  '@vue/typescript-plugin@2.0.26-alpha.2(typescript@5.5.3)':
     dependencies:
-      '@volar/typescript': 2.4.0-alpha.11
-      '@vue/language-core': 2.0.24(typescript@5.5.3)
+      '@volar/typescript': 2.4.0-alpha.12
+      '@vue/language-core': 2.0.26-alpha.2(typescript@5.5.3)
       '@vue/shared': 3.4.31
     transitivePeerDependencies:
       - typescript
@@ -2366,40 +2358,40 @@ snapshots:
 
   es-errors@1.3.0: {}
 
-  esbuild-plugin-copy@2.1.1(esbuild@0.22.0):
+  esbuild-plugin-copy@2.1.1(esbuild@0.23.0):
     dependencies:
       chalk: 4.1.2
       chokidar: 3.6.0
-      esbuild: 0.22.0
+      esbuild: 0.23.0
       fs-extra: 10.1.0
       globby: 11.1.0
 
-  esbuild@0.22.0:
+  esbuild@0.23.0:
     optionalDependencies:
-      '@esbuild/aix-ppc64': 0.22.0
-      '@esbuild/android-arm': 0.22.0
-      '@esbuild/android-arm64': 0.22.0
-      '@esbuild/android-x64': 0.22.0
-      '@esbuild/darwin-arm64': 0.22.0
-      '@esbuild/darwin-x64': 0.22.0
-      '@esbuild/freebsd-arm64': 0.22.0
-      '@esbuild/freebsd-x64': 0.22.0
-      '@esbuild/linux-arm': 0.22.0
-      '@esbuild/linux-arm64': 0.22.0
-      '@esbuild/linux-ia32': 0.22.0
-      '@esbuild/linux-loong64': 0.22.0
-      '@esbuild/linux-mips64el': 0.22.0
-      '@esbuild/linux-ppc64': 0.22.0
-      '@esbuild/linux-riscv64': 0.22.0
-      '@esbuild/linux-s390x': 0.22.0
-      '@esbuild/linux-x64': 0.22.0
-      '@esbuild/netbsd-x64': 0.22.0
-      '@esbuild/openbsd-arm64': 0.22.0
-      '@esbuild/openbsd-x64': 0.22.0
-      '@esbuild/sunos-x64': 0.22.0
-      '@esbuild/win32-arm64': 0.22.0
-      '@esbuild/win32-ia32': 0.22.0
-      '@esbuild/win32-x64': 0.22.0
+      '@esbuild/aix-ppc64': 0.23.0
+      '@esbuild/android-arm': 0.23.0
+      '@esbuild/android-arm64': 0.23.0
+      '@esbuild/android-x64': 0.23.0
+      '@esbuild/darwin-arm64': 0.23.0
+      '@esbuild/darwin-x64': 0.23.0
+      '@esbuild/freebsd-arm64': 0.23.0
+      '@esbuild/freebsd-x64': 0.23.0
+      '@esbuild/linux-arm': 0.23.0
+      '@esbuild/linux-arm64': 0.23.0
+      '@esbuild/linux-ia32': 0.23.0
+      '@esbuild/linux-loong64': 0.23.0
+      '@esbuild/linux-mips64el': 0.23.0
+      '@esbuild/linux-ppc64': 0.23.0
+      '@esbuild/linux-riscv64': 0.23.0
+      '@esbuild/linux-s390x': 0.23.0
+      '@esbuild/linux-x64': 0.23.0
+      '@esbuild/netbsd-x64': 0.23.0
+      '@esbuild/openbsd-arm64': 0.23.0
+      '@esbuild/openbsd-x64': 0.23.0
+      '@esbuild/sunos-x64': 0.23.0
+      '@esbuild/win32-arm64': 0.23.0
+      '@esbuild/win32-ia32': 0.23.0
+      '@esbuild/win32-x64': 0.23.0
 
   escape-html@1.0.3: {}
 
@@ -3213,61 +3205,61 @@ snapshots:
 
   vary@1.1.2: {}
 
-  volar-service-css@0.0.56(@volar/language-service@2.4.0-alpha.11):
+  volar-service-css@0.0.58(@volar/language-service@2.4.0-alpha.12):
     dependencies:
       vscode-css-languageservice: 6.3.0
       vscode-languageserver-textdocument: 1.0.11
       vscode-uri: 3.0.8
     optionalDependencies:
-      '@volar/language-service': 2.4.0-alpha.11
+      '@volar/language-service': 2.4.0-alpha.12
 
-  volar-service-emmet@0.0.56(@volar/language-service@2.4.0-alpha.11):
+  volar-service-emmet@0.0.58(@volar/language-service@2.4.0-alpha.12):
     dependencies:
       '@emmetio/css-parser': 0.4.0
       '@emmetio/html-matcher': 1.3.0
       '@vscode/emmet-helper': 2.9.3
       vscode-uri: 3.0.8
     optionalDependencies:
-      '@volar/language-service': 2.4.0-alpha.11
+      '@volar/language-service': 2.4.0-alpha.12
 
-  volar-service-html@0.0.56(@volar/language-service@2.4.0-alpha.11):
+  volar-service-html@0.0.58(@volar/language-service@2.4.0-alpha.12):
     dependencies:
       vscode-html-languageservice: 5.3.0
       vscode-languageserver-textdocument: 1.0.11
       vscode-uri: 3.0.8
     optionalDependencies:
-      '@volar/language-service': 2.4.0-alpha.11
+      '@volar/language-service': 2.4.0-alpha.12
 
-  volar-service-json@0.0.56(@volar/language-service@2.4.0-alpha.11):
+  volar-service-json@0.0.58(@volar/language-service@2.4.0-alpha.12):
     dependencies:
       vscode-json-languageservice: 5.4.0
       vscode-uri: 3.0.8
     optionalDependencies:
-      '@volar/language-service': 2.4.0-alpha.11
+      '@volar/language-service': 2.4.0-alpha.12
 
-  volar-service-pug-beautify@0.0.56(@volar/language-service@2.4.0-alpha.11):
+  volar-service-pug-beautify@0.0.58(@volar/language-service@2.4.0-alpha.12):
     dependencies:
       '@johnsoncodehk/pug-beautify': 0.2.2
     optionalDependencies:
-      '@volar/language-service': 2.4.0-alpha.11
+      '@volar/language-service': 2.4.0-alpha.12
 
-  volar-service-pug@0.0.56:
+  volar-service-pug@0.0.58:
     dependencies:
-      '@volar/language-service': 2.4.0-alpha.11
+      '@volar/language-service': 2.4.0-alpha.12
       muggle-string: 0.4.1
       pug-lexer: 5.0.1
       pug-parser: 6.0.0
-      volar-service-html: 0.0.56(@volar/language-service@2.4.0-alpha.11)
+      volar-service-html: 0.0.58(@volar/language-service@2.4.0-alpha.12)
       vscode-html-languageservice: 5.3.0
       vscode-languageserver-textdocument: 1.0.11
 
-  volar-service-typescript-twoslash-queries@0.0.56(@volar/language-service@2.4.0-alpha.11):
+  volar-service-typescript-twoslash-queries@0.0.58(@volar/language-service@2.4.0-alpha.12):
     dependencies:
       vscode-uri: 3.0.8
     optionalDependencies:
-      '@volar/language-service': 2.4.0-alpha.11
+      '@volar/language-service': 2.4.0-alpha.12
 
-  volar-service-typescript@0.0.56(@volar/language-service@2.4.0-alpha.11):
+  volar-service-typescript@0.0.58(@volar/language-service@2.4.0-alpha.12):
     dependencies:
       path-browserify: 1.0.1
       semver: 7.6.2
@@ -3276,18 +3268,7 @@ snapshots:
       vscode-nls: 5.2.0
       vscode-uri: 3.0.8
     optionalDependencies:
-      '@volar/language-service': 2.4.0-alpha.11
-
-  volar-service-typescript@0.0.57(@volar/language-service@2.4.0-alpha.11):
-    dependencies:
-      path-browserify: 1.0.1
-      semver: 7.6.2
-      typescript-auto-import-cache: 0.3.3
-      vscode-languageserver-textdocument: 1.0.11
-      vscode-nls: 5.2.0
-      vscode-uri: 3.0.8
-    optionalDependencies:
-      '@volar/language-service': 2.4.0-alpha.11
+      '@volar/language-service': 2.4.0-alpha.12
 
   vscode-css-languageservice@6.3.0:
     dependencies:
