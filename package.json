@@ -96,9 +96,9 @@
 	},
 	"devDependencies": {
 		"@types/vscode": "^1.82.0",
-		"@volar/jsdelivr": "~2.4.0-alpha.9",
-		"@volar/language-server": "~2.4.0-alpha.9",
-		"@volar/vscode": "~2.4.0-alpha.9",
+		"@volar/jsdelivr": "~2.4.0-alpha.10",
+		"@volar/language-server": "~2.4.0-alpha.10",
+		"@volar/vscode": "~2.4.0-alpha.10",
 		"@vscode/test-web": "latest",
 		"@vscode/vsce": "latest",
 		"@vue/language-service": "2.0.24",
