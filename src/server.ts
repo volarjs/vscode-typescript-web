@@ -1,98 +1,172 @@
-import createTsService from 'volar-service-typescript';
-import * as cdn from '@volar/cdn';
-import { createConnection, startLanguageServer, LanguageServerPlugin } from '@volar/language-server/browser';
-import { TypeScriptWebServerOptions } from './types';
+import { createNpmFileSystem } from '@volar/jsdelivr';
+import { createConnection, createServer, createTypeScriptProject, Disposable, LanguagePlugin, LanguageServicePlugin, loadTsdkByUrl } from '@volar/language-server/browser';
+import { createParsedCommandLine, createVueLanguagePlugin, FileMap, getFullLanguageServicePlugins, resolveVueCompilerOptions, VueCompilerOptions } from '@vue/language-service';
+import type * as ts from 'typescript';
+import { create as createTypeScriptServicePlugins } from 'volar-service-typescript';
+import type { URI } from 'vscode-uri';
+import type { TypeScriptWebServerOptions } from './types';
 
 const connection = createConnection();
-const emptyPluginInstance: ReturnType<LanguageServerPlugin> = {
-	extraFileExtensions: [],
-	watchFileExtensions: [],
-};
+const server = createServer(connection);
 
-/**
- * Base TypeScript plugin
- */
+connection.onInitialize(async params => {
+	const { globalModules, supportVue, typescript }: TypeScriptWebServerOptions = params.initializationOptions;
+	const tsdk = await loadTsdkByUrl(typescript.tsdkUrl, params.locale);
+	const ataSys = createNpmFileSystem();
+	const languageServicePlugins: LanguageServicePlugin[] = [];
+	const watchingExtensions = new Set<string>();
 
-const basePlugin: LanguageServerPlugin = (options: TypeScriptWebServerOptions, modules): ReturnType<LanguageServerPlugin> => {
+	let fileWatcher: Promise<Disposable> | undefined;
 
-	const jsDelivrUriResolver = cdn.createJsDelivrUriResolver('/node_modules', options.versions);
-	const jsDelivrFs = cdn.createJsDelivrFs();
+	if (supportVue) {
+		// Already includes TS support
+		// @ts-expect-error
+		languageServicePlugins.push(...getFullLanguageServicePlugins(tsdk.typescript));
+	}
+	else {
+		// @ts-expect-error
+		languageServicePlugins.push(...createTypeScriptServicePlugins(tsdk.typescript));
+	}
 
-	return {
-		extraFileExtensions: [],
-		watchFileExtensions: ['js', 'cjs', 'mjs', 'ts', 'cts', 'mts', 'jsx', 'tsx', 'json'],
-		resolveConfig(config, ctx) {
-
-			if (ctx) {
-				cdn.decorateServiceEnvironment(ctx.env, jsDelivrUriResolver, jsDelivrFs);
-			}
-
-			if (options.globalModules) {
-				config.languages ??= {};
-				config.languages.globalEnv = {
-					createVirtualFile() {
-						return undefined;
+	return server.initialize(
+		params,
+		createTypeScriptProject(
+			tsdk.typescript,
+			tsdk.diagnosticMessages,
+			async ({ env, asFileName, projectHost, sys, configFileName }) => {
+				const { fs } = env;
+				env.fs = {
+					async stat(uri) {
+						return await ataSys.stat(uri) ?? await fs?.stat(uri);
 					},
-					updateVirtualFile() { },
-					resolveHost(host) {
-						const text = (options.globalModules ?? []).map(name => `/// <reference types="${name}" />`).join('\n');
-						const snapshot = modules.typescript!.ScriptSnapshot.fromString(text);
-						return {
-							...host,
-							getScriptFileNames() {
-								return [
-									...host.getScriptFileNames(),
-									'/global.d.ts',
-								];
-							},
-							getScriptSnapshot(fileName) {
-								if (fileName === '/global.d.ts') {
-									return snapshot;
-								}
-								return host.getScriptSnapshot(fileName);
-							}
-						};
+					async readDirectory(uri) {
+						return [
+							...await ataSys.readDirectory(uri),
+							... await fs?.readDirectory(uri) ?? [],
+						];
+					},
+					async readFile(uri) {
+						return await ataSys.readFile(uri) ?? await fs?.readFile(uri);
 					},
 				}
+				const plugins: LanguagePlugin<URI>[] = [];
+				const watchExtensions = ['js', 'cjs', 'mjs', 'ts', 'cts', 'mts', 'jsx', 'tsx', 'json'];
+				if (globalModules) {
+					plugins.push(createGlobalEnvPlugin(globalModules));
+				}
+				let compilerOptions: ts.CompilerOptions | undefined;
+				let vueCompilerOptions: VueCompilerOptions | undefined;
+				if (supportVue) {
+					if (configFileName) {
+						let commandLine = createParsedCommandLine(tsdk.typescript, sys, configFileName);
+						let sysVersion = sys.version;
+						let newSysVersion = await sys.sync();
+						while (sysVersion !== newSysVersion) {
+							commandLine = createParsedCommandLine(tsdk.typescript, sys, configFileName);
+							sysVersion = newSysVersion;
+							newSysVersion = await sys.sync();
+						}
+						compilerOptions = commandLine.options;
+						vueCompilerOptions = commandLine.vueOptions;
+					}
+					else {
+						compilerOptions = tsdk.typescript.getDefaultCompilerOptions();
+						vueCompilerOptions = resolveVueCompilerOptions({});
+					}
+					plugins.push(
+						createVueLanguagePlugin(
+							tsdk.typescript,
+							asFileName,
+							() => projectHost.getProjectVersion?.() ?? '',
+							fileName => {
+								const fileMap = new FileMap(sys.useCaseSensitiveFileNames ?? false);
+								for (const vueFileName of projectHost?.getScriptFileNames() ?? []) {
+									fileMap.set(vueFileName, undefined);
+								}
+								return fileMap.has(fileName);
+							},
+							compilerOptions,
+							vueCompilerOptions
+						)
+					);
+					watchExtensions.push(
+						...vueCompilerOptions.extensions.map(ext => ext.slice(1)),
+						...vueCompilerOptions.vitePressExtensions.map(ext => ext.slice(1)),
+						...vueCompilerOptions.petiteVueExtensions.map(ext => ext.slice(1)),
+					);
+				}
+				updateFileWatcher(watchExtensions);
+				return {
+					languagePlugins: plugins,
+					setup({ project }) {
+						if (vueCompilerOptions) {
+							// @ts-expect-error pnpm issue
+							project.vue = { compilerOptions: vueCompilerOptions }
+						}
+					},
+				};
 			}
+		),
+		languageServicePlugins
+	);
 
-			config.services ??= {};
-			config.services.typescript = createTsService();
+	function updateFileWatcher(extensions: string[]) {
+		const newExtensions = extensions.filter(ext => !watchingExtensions.has(ext));
+		if (newExtensions.length) {
+			for (const ext of newExtensions) {
+				watchingExtensions.add(ext);
+			}
+			fileWatcher?.then(dispose => dispose.dispose());
+			fileWatcher = server.watchFiles(['**/*.{' + [...watchingExtensions].join(',') + '}']);
+		}
+	}
+});
 
-			return config;
+connection.onInitialized(server.initialized);
+
+connection.onShutdown(server.shutdown);
+
+connection.listen();
+
+function createGlobalEnvPlugin(globalModules: string[]): LanguagePlugin<URI> {
+	return {
+		getLanguageId() {
+			return undefined;
 		},
-	}
-};
-
-/**
- * Vue plugin
- */
-
-import * as vue from '@vue/language-server/out/languageServerPlugin';
-
-const vuePlugin: LanguageServerPlugin = (options: TypeScriptWebServerOptions, modules): ReturnType<LanguageServerPlugin> => {
-	if (!options.supportVue) {
-		return emptyPluginInstance;
-	}
-	return vue.createServerPlugin(connection)(options, modules);
-};
-
-/**
- * Astro plugin
- */
-
-// import * as astro from '@astrojs/language-server/dist/languageServerPlugin';
-
-// const astroPlugin: LanguageServerPlugin = (options: TypeScriptWebServerOptions, modules): ReturnType<LanguageServerPlugin> => {
-// 	if (!options.supportAstro) {
-// 		return emptyPluginInstance;
-// 	}
-// 	return astro.plugin(options, modules)
-// };
-
-startLanguageServer(
-	connection,
-	basePlugin,
-	vuePlugin,
-	// astroPlugin,
-);
+		typescript: {
+			extraFileExtensions: [],
+			getServiceScript() {
+				return undefined;
+			},
+			resolveLanguageServiceHost(host) {
+				const text = globalModules.map(name => `/// <reference types="${name}" />`).join('\n');
+				const snapshot: ts.IScriptSnapshot = {
+					getText(start, end) {
+						return text.substring(start, end);
+					},
+					getLength() {
+						return text.length;
+					},
+					getChangeRange() {
+						return undefined;
+					},
+				};
+				return {
+					...host,
+					getScriptFileNames() {
+						return [
+							...host.getScriptFileNames(),
+							'/__virtual_global.d.ts',
+						];
+					},
+					getScriptSnapshot(fileName) {
+						if (fileName === '/__virtual_global.d.ts') {
+							return snapshot;
+						}
+						return host.getScriptSnapshot(fileName);
+					}
+				};
+			},
+		},
+	};
+}

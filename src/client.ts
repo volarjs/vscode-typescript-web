@@ -1,12 +1,12 @@
-import * as vscode from 'vscode';
 import {
+	activateAutoInsertion,
 	activateFindFileReferences,
 	activateReloadProjects,
 	activateServerSys,
-	activateAutoInsertion,
 	activateTsConfigStatusItem,
 } from '@volar/vscode';
 import * as lsp from '@volar/vscode/browser';
+import * as vscode from 'vscode';
 import type { TypeScriptWebServerOptions } from './types';
 
 let client: lsp.BaseLanguageClient | undefined;
@@ -17,22 +17,13 @@ export async function activate(context: vscode.ExtensionContext) {
 	const serverMain = vscode.Uri.joinPath(context.extensionUri, 'dist/server.js');
 	const worker = new Worker(serverMain.toString());
 	const documentSelector: lsp.DocumentSelector = [
-		{ language: 'typescript' },
-		{ language: 'typescriptreact' },
-		{ language: 'javascript' },
-		{ language: 'javascriptreact' },
-	];
-	const documentFilter = (document: vscode.TextDocument): boolean => [
 		'typescript',
 		'typescriptreact',
 		'javascript',
 		'javascriptreact',
-		configs.supportVue ? 'vue' : undefined,
-		configs.supportAstro ? 'astro' : undefined,
-	].includes(document.languageId);
-
-	if (configs.supportVue) documentSelector.push({ language: 'vue' });
-	if (configs.supportAstro) documentSelector.push({ language: 'astro' });
+	];
+	if (configs.supportVue) documentSelector.push('vue');
+	if (configs.supportAstro) documentSelector.push('astro');
 
 	const clientOptions: lsp.LanguageClientOptions = {
 		documentSelector,
@@ -55,10 +46,10 @@ export async function activate(context: vscode.ExtensionContext) {
 	await client.start();
 
 	activateFindFileReferences('typescript-web.find-file-references', client);
-	activateReloadProjects('typescript-web.reload-projects', [client]);
+	activateReloadProjects('typescript-web.reload-projects', client);
 	activateServerSys(client);
-	activateAutoInsertion([client], documentFilter);
-	activateTsConfigStatusItem('typescript-web.tsconfig', client, documentFilter);
+	activateAutoInsertion(documentSelector, client);
+	activateTsConfigStatusItem(documentSelector, 'typescript-web.tsconfig', client);
 }
 
 export function deactivate() {

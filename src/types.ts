@@ -1,6 +1,7 @@
-import { InitializationOptions } from '@volar/language-server/browser';
-
-export interface TypeScriptWebServerOptions extends InitializationOptions {
+export interface TypeScriptWebServerOptions {
+    typescript: {
+        tsdkUrl: string;
+    };
     versions?: Record<string, string>;
     globalModules?: string[];
     supportVue?: boolean;
