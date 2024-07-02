@@ -23,7 +23,6 @@ export async function activate(context: vscode.ExtensionContext) {
 		'javascriptreact',
 	];
 	if (configs.supportVue) documentSelector.push('vue');
-	if (configs.supportAstro) documentSelector.push('astro');
 
 	const clientOptions: lsp.LanguageClientOptions = {
 		documentSelector,
@@ -34,7 +33,6 @@ export async function activate(context: vscode.ExtensionContext) {
 			versions: configs.versions,
 			globalModules: configs.globalModules,
 			supportVue: configs.supportVue,
-			supportAstro: configs.supportAstro,
 		} satisfies TypeScriptWebServerOptions,
 	};
 	client = new lsp.LanguageClient(
@@ -73,6 +71,5 @@ function getConfigs() {
 		versions: JSON.parse(JSON.stringify(configs.get<Record<string, string>>('dts.versions'))),
 		globalModules: configs.get<string[]>('dts.globals'),
 		supportVue: configs.get<boolean>('supportVue') ?? false,
-		supportAstro: configs.get<boolean>('supportAstro') ?? false,
 	};
 }

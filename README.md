@@ -21,7 +21,7 @@ This extension only includes IntelliSense support; you will still need to instal
 
 ## Disable Built-in TypeScript Extension
 
-This extension and the Built-in TypeScript Extension sometimes show duplicate results, which is not a big problem, but you still can disable the Built-in TypeScript Extension yourself if you want, please refer to https://vuejs.org/guide/typescript/overview.html#volar-takeover-mode.
+This extension and the Built-in TypeScript Extension sometimes show duplicate results, which is not a big problem, but you still can disable the Built-in TypeScript Extension yourself if you want.
 
 ## Settings
 

@@ -22,7 +22,6 @@
 	},
 	"activationEvents": [
 		"onLanguage:vue",
-		"onLanguage:astro",
 		"onLanguage:javascript",
 		"onLanguage:typescript",
 		"onLanguage:javascriptreact",
@@ -35,12 +34,6 @@
 				"id": "vue",
 				"extensions": [
 					".vue"
-				]
-			},
-			{
-				"id": "astro",
-				"extensions": [
-					".astro"
 				]
 			}
 		],
@@ -77,11 +70,6 @@
 					"type": "boolean",
 					"default": true,
 					"description": "Support Vue SFC."
-				},
-				"typescript-web.supportAstro": {
-					"type": "boolean",
-					"default": true,
-					"description": "Support Astro SFC."
 				}
 			}
 		}
