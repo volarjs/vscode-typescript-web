@@ -96,16 +96,16 @@
 	},
 	"devDependencies": {
 		"@types/vscode": "^1.82.0",
-		"@volar/jsdelivr": "~2.4.0-alpha.10",
-		"@volar/language-server": "~2.4.0-alpha.10",
-		"@volar/vscode": "~2.4.0-alpha.10",
+		"@volar/jsdelivr": "~2.4.0-alpha.11",
+		"@volar/language-server": "~2.4.0-alpha.11",
+		"@volar/vscode": "~2.4.0-alpha.11",
 		"@vscode/test-web": "latest",
 		"@vscode/vsce": "latest",
 		"@vue/language-service": "2.0.24",
 		"esbuild": "latest",
 		"esbuild-plugin-copy": "latest",
 		"typescript": "latest",
-		"volar-service-typescript": "0.0.56",
+		"volar-service-typescript": "0.0.57",
 		"vscode-uri": "^3.0.8"
 	},
 	"packageManager": "pnpm@9.4.0"

@@ -1,31 +1,35 @@
 import { createNpmFileSystem } from '@volar/jsdelivr';
-import { createConnection, createServer, createTypeScriptProject, Disposable, LanguagePlugin, LanguageServicePlugin, loadTsdkByUrl } from '@volar/language-server/browser';
+import { createConnection, createServer, createTypeScriptProject, Disposable, LanguagePlugin, loadTsdkByUrl } from '@volar/language-server/browser';
 import { createParsedCommandLine, createVueLanguagePlugin, FileMap, getFullLanguageServicePlugins, resolveVueCompilerOptions, VueCompilerOptions } from '@vue/language-service';
 import type * as ts from 'typescript';
 import { create as createTypeScriptServicePlugins } from 'volar-service-typescript';
-import type { URI } from 'vscode-uri';
+import { URI } from 'vscode-uri';
 import type { TypeScriptWebServerOptions } from './types';
 
 const connection = createConnection();
 const server = createServer(connection);
 
+function getCdnPath(uri: URI) {
+	if (uri.scheme === 'https' && uri.authority === 'cdn.jsdelivr.net' && uri.path.startsWith('/npm/')) {
+		return uri.path.slice('/npm/'.length);
+	}
+}
+
 connection.onInitialize(async params => {
 	const { globalModules, supportVue, typescript }: TypeScriptWebServerOptions = params.initializationOptions;
 	const tsdk = await loadTsdkByUrl(typescript.tsdkUrl, params.locale);
-	const ataSys = createNpmFileSystem();
-	const languageServicePlugins: LanguageServicePlugin[] = [];
+	const ataSys = createNpmFileSystem(getCdnPath);
+	const languageServicePlugins = createTypeScriptServicePlugins(tsdk.typescript);
 	const watchingExtensions = new Set<string>();
 
 	let fileWatcher: Promise<Disposable> | undefined;
 
 	if (supportVue) {
-		// Already includes TS support
-		// @ts-expect-error
-		languageServicePlugins.push(...getFullLanguageServicePlugins(tsdk.typescript));
-	}
-	else {
-		// @ts-expect-error
-		languageServicePlugins.push(...createTypeScriptServicePlugins(tsdk.typescript));
+		for (const plugin of getFullLanguageServicePlugins(tsdk.typescript)) {
+			if (!languageServicePlugins.some(lsPlugin => lsPlugin.name === plugin.name)) {
+				languageServicePlugins.push(plugin);
+			}
+		}
 	}
 
 	return server.initialize(
@@ -33,20 +37,42 @@ connection.onInitialize(async params => {
 		createTypeScriptProject(
 			tsdk.typescript,
 			tsdk.diagnosticMessages,
-			async ({ env, asFileName, projectHost, sys, configFileName }) => {
+			async ({ env, uriConverter, projectHost, sys, configFileName }) => {
+				const { asFileName, asUri } = uriConverter;
+				uriConverter.asUri = (fileName) => {
+					if (fileName === '/node_modules') {
+						return URI.parse('https://cdn.jsdelivr.net/npm/');
+					}
+					if (fileName.startsWith('/node_modules/')) {
+						return URI.parse('https://cdn.jsdelivr.net/npm/' + fileName.slice('/node_modules/'.length));
+					}
+					return asUri(fileName);
+				};
+				uriConverter.asFileName = (uri) => {
+					if (getCdnPath(uri) !== undefined) {
+						return '/node_modules' + uri.path.slice('/npm'.length);
+					}
+					return asFileName(uri);
+				};
 				const { fs } = env;
 				env.fs = {
-					async stat(uri) {
-						return await ataSys.stat(uri) ?? await fs?.stat(uri);
+					stat(uri) {
+						if (getCdnPath(uri) !== undefined) {
+							return ataSys.stat(uri);
+						}
+						return fs?.stat(uri);
 					},
-					async readDirectory(uri) {
-						return [
-							...await ataSys.readDirectory(uri),
-							... await fs?.readDirectory(uri) ?? [],
-						];
+					readDirectory(uri) {
+						if (getCdnPath(uri) !== undefined) {
+							return ataSys.readDirectory(uri);
+						}
+						return fs?.readDirectory(uri) ?? []
 					},
-					async readFile(uri) {
-						return await ataSys.readFile(uri) ?? await fs?.readFile(uri);
+					readFile(uri) {
+						if (getCdnPath(uri) !== undefined) {
+							return ataSys.readFile(uri);
+						}
+						return fs?.readFile(uri);
 					},
 				}
 				const plugins: LanguagePlugin<URI>[] = [];
@@ -76,7 +102,7 @@ connection.onInitialize(async params => {
 					plugins.push(
 						createVueLanguagePlugin(
 							tsdk.typescript,
-							asFileName,
+							s => uriConverter.asFileName(s),
 							() => projectHost.getProjectVersion?.() ?? '',
 							fileName => {
 								const fileMap = new FileMap(sys.useCaseSensitiveFileNames ?? false);
@@ -100,7 +126,6 @@ connection.onInitialize(async params => {
 					languagePlugins: plugins,
 					setup({ project }) {
 						if (vueCompilerOptions) {
-							// @ts-expect-error pnpm issue
 							project.vue = { compilerOptions: vueCompilerOptions }
 						}
 					},
