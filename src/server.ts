@@ -39,6 +39,7 @@ connection.onInitialize(async params => {
 			tsdk.diagnosticMessages,
 			async ({ env, uriConverter, projectHost, sys, configFileName }) => {
 				const { asFileName, asUri } = uriConverter;
+				const workspaceFolders = [...server.workspaceFolders.keys()];
 				uriConverter.asUri = (fileName) => {
 					if (fileName === '/node_modules') {
 						return URI.parse('vscode-typescript-web://cdn/');
@@ -46,12 +47,33 @@ connection.onInitialize(async params => {
 					if (fileName.startsWith('/node_modules/')) {
 						return URI.parse('vscode-typescript-web://cdn/' + fileName.slice('/node_modules/'.length));
 					}
+					if (workspaceFolders.length === 1 && fileName.startsWith('/')) {
+						const basePath = workspaceFolders[0].path.endsWith('/')
+							? workspaceFolders[0].path
+							: workspaceFolders[0].path + '/';
+						return URI.from({
+							...workspaceFolders[0],
+							path: basePath.slice(0, -1) + fileName,
+						});
+					}
 					return asUri(fileName);
 				};
 				uriConverter.asFileName = (uri) => {
 					const cdnPath = getCdnPath(uri);
 					if (cdnPath !== undefined) {
 						return '/node_modules/' + cdnPath;
+					}
+					if (workspaceFolders.length === 1) {
+						const basePath = workspaceFolders[0].path.endsWith('/')
+							? workspaceFolders[0].path
+							: workspaceFolders[0].path + '/';
+						if (
+							uri.scheme === workspaceFolders[0].scheme
+							&& uri.authority === workspaceFolders[0].authority
+							&& uri.path.startsWith(basePath)
+						) {
+							return uri.path.slice(basePath.length - 1);
+						}
 					}
 					return asFileName(uri);
 				};
@@ -61,17 +83,26 @@ connection.onInitialize(async params => {
 						if (getCdnPath(uri) !== undefined) {
 							return ataSys.stat(uri);
 						}
+						if (uri.path.endsWith('/node_modules') || uri.path.includes('/node_modules/')) {
+							return;
+						}
 						return fs?.stat(uri);
 					},
 					readDirectory(uri) {
 						if (getCdnPath(uri) !== undefined) {
 							return ataSys.readDirectory(uri);
 						}
+						if (uri.path.endsWith('/node_modules') || uri.path.includes('/node_modules/')) {
+							return [];
+						}
 						return fs?.readDirectory(uri) ?? []
 					},
 					readFile(uri) {
 						if (getCdnPath(uri) !== undefined) {
 							return ataSys.readFile(uri);
+						}
+						if (uri.path.endsWith('/node_modules') || uri.path.includes('/node_modules/')) {
+							return;
 						}
 						return fs?.readFile(uri);
 					},
